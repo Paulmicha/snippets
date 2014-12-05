@@ -28,11 +28,11 @@ jQuery.fn.proxify = function(options)
 	$(this).each(function()
 	{
         var $this = $(this),
-            json_str = options.attr ? $this.attr(options.attr) : $this.attr('data-proxy');
+            json_str = (options && options.attr) ? $this.attr(options.attr) : $this.attr('data-proxy');
         
         //      Support not using JSON in a data-attribute
         //      ex: $('.my-selector').proxify({properties:{evt_types:"mouseenter mouseleave focus blur", target:".bg-overlay"}});
-        if (options.properties) {
+        if (options && options.properties) {
             properties = options.properties;
         }
         else
