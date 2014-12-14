@@ -21,12 +21,13 @@
  *      }
  *  
  *  @requires jquery 1.7+
+ *  @see http://api.jquery.com/on/
  */
 jQuery.fn.proxify = function(options)
 {
-	$ = jQuery;
-	$(this).each(function()
-	{
+    $ = jQuery;
+    $(this).each(function()
+    {
         var $this = $(this),
             json_str = (options && options.attr) ? $this.attr(options.attr) : $this.attr('data-proxy');
         
@@ -82,7 +83,7 @@ jQuery.fn.proxify = function(options)
                     function(e)
                     {
                         e.data.targets.toggleClass(e.data.toggle_class);
-                        if (e.data.options.callback && typeof e.data.options.callback === 'function') {
+                        if (e.data.options && e.data.options.callback && typeof e.data.options.callback === 'function') {
                             e.data.options.callback(e.data);
                         }
                     }

@@ -20,10 +20,10 @@
  */
 jQuery.fn.toggler = function(options)
 {
-	$ = jQuery;
-	$(this).each(function()
-	{
-		var $this = $(this),
+    $ = jQuery;
+    $(this).each(function()
+    {
+        var $this = $(this),
             href = $this.attr('href'),
             target_selector = href ? href : '#' + $this.attr('aria-controls')
             $target = target_selector ? $(target_selector) : {};
@@ -79,5 +79,5 @@ jQuery.fn.toggler = function(options)
                 e.preventDefault();
             });
         }
-	});
+    });
 };
