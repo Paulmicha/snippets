@@ -8,7 +8,7 @@
 
 :root {
     --padding-s: calc(var(--base-font-size) * var(--base-line-height) / 3)px;
-    --padding-s-ratio: calc((var(--base-font-size) * var(--base-line-height) / 3) / var(--base-font-size));
+    --padding-ratio-s: calc((var(--base-font-size) * var(--base-line-height) / 3) / var(--base-font-size));
 }
 
 .p--s {

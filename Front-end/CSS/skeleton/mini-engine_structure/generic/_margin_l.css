@@ -8,7 +8,7 @@
 
 :root {
     --margin-l: calc(var(--base-font-size) * var(--base-line-height));
-    --margin-l-ratio: calc((var(--base-font-size) * var(--base-line-height)) / var(--base-font-size));
+    --margin-ratio-l: calc((var(--base-font-size) * var(--base-line-height)) / var(--base-font-size));
 }
 
 .m--l {

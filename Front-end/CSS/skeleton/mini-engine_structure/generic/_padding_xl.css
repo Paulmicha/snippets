@@ -8,7 +8,7 @@
 
 :root {
     --padding-xl: calc(var(--base-font-size) * var(--base-line-height) * 2);
-    --padding-xl-ratio: calc((var(--base-font-size) * var(--base-line-height) * 2) / var(--base-font-size));
+    --padding-ratio-xl: calc((var(--base-font-size) * var(--base-line-height) * 2) / var(--base-font-size));
 }
 
 .p--xl {
