@@ -7,13 +7,13 @@
  */
 
 :root {
-    --base-padding-l: calc(var(--base-font-size) * var(--base-line-height))px;
-    --base-padding-l-rem: calc((var(--base-font-size) * var(--base-line-height)) / var(--base-font-size))rem;
+    --padding-l: calc(var(--base-font-size) * var(--base-line-height));
+    --padding-l-ratio: calc((var(--base-font-size) * var(--base-line-height)) / var(--base-font-size));
 }
 
 .p--l {
-    padding: var(--base-padding-l) !important;
-    padding: var(--base-padding-rem-l) !important;
+    padding: var(--padding-l)px !important;
+    padding: var(--padding-ratio-l)rem !important;
 }
 
 
@@ -21,20 +21,20 @@
 */
 
 .p-t--l {
-    padding-top: var(--base-padding-l) !important;
-    padding-top: var(--base-padding-rem-l) !important;
+    padding-top: var(--padding-l)px !important;
+    padding-top: var(--padding-ratio-l)rem !important;
 }
 .p-r--l {
-    padding-right: var(--base-padding-l) !important;
-    padding-right: var(--base-padding-rem-l) !important;
+    padding-right: var(--padding-l)px !important;
+    padding-right: var(--padding-ratio-l)rem !important;
 }
 .p-b--l {
-    padding-bottom: var(--base-padding-l) !important;
-    padding-bottom: var(--base-padding-rem-l) !important;
+    padding-bottom: var(--padding-l)px !important;
+    padding-bottom: var(--padding-ratio-l)rem !important;
 }
 .p-l--l {
-    padding-left: var(--base-padding-l) !important;
-    padding-left: var(--base-padding-rem-l) !important;
+    padding-left: var(--padding-l)px !important;
+    padding-left: var(--padding-ratio-l)rem !important;
 }
 
 
@@ -42,28 +42,28 @@
 */
 
 .p-tr--l {
-    padding: var(--base-padding-l) var(--base-padding-l) 0 0 !important;
-    padding: var(--base-padding-rem-l) var(--base-padding-rem-l) 0 0 !important;
+    padding: var(--padding-l)px var(--padding-l)px 0 0 !important;
+    padding: var(--padding-ratio-l)rem var(--padding-ratio-l)rem 0 0 !important;
 }
 .p-tb--l {
-    padding: var(--base-padding-l) 0 !important;
-    padding: var(--base-padding-rem-l) 0 !important;
+    padding: var(--padding-l)px 0 !important;
+    padding: var(--padding-ratio-l)rem 0 !important;
 }
 .p-tl--l {
-    padding: var(--base-padding-l) 0 0 var(--base-padding-l) !important;
-    padding: var(--base-padding-rem-l) 0 0 var(--base-padding-rem-l) !important;
+    padding: var(--padding-l)px 0 0 var(--padding-l)px !important;
+    padding: var(--padding-ratio-l)rem 0 0 var(--padding-ratio-l)rem !important;
 }
 .p-rb--l {
-    padding: 0 var(--base-padding-l) var(--base-padding-l) 0 !important;
-    padding: 0 var(--base-padding-rem-l) var(--base-padding-rem-l) 0 !important;
+    padding: 0 var(--padding-l)px var(--padding-l)px 0 !important;
+    padding: 0 var(--padding-ratio-l)rem var(--padding-ratio-l)rem 0 !important;
 }
 .p-rl--l {
-    padding: 0 var(--base-padding-l) !important;
-    padding: 0 var(--base-padding-rem-l) !important;
+    padding: 0 var(--padding-l)px !important;
+    padding: 0 var(--padding-ratio-l)rem !important;
 }
 .p-bl--l {
-    padding: 0 0 var(--base-padding-l) var(--base-padding-l) !important;
-    padding: 0 0 var(--base-padding-rem-l) var(--base-padding-rem-l) !important;
+    padding: 0 0 var(--padding-l)px var(--padding-l)px !important;
+    padding: 0 0 var(--padding-ratio-l)rem var(--padding-ratio-l)rem !important;
 }
 
 
@@ -71,20 +71,20 @@
 */
 
 .p-trb--l {
-    padding: var(--base-padding-l) var(--base-padding-l) var(--base-padding-l) 0 !important;
-    padding: var(--base-padding-rem-l) var(--base-padding-rem-l) var(--base-padding-rem-l) 0 !important;
+    padding: var(--padding-l)px var(--padding-l)px var(--padding-l)px 0 !important;
+    padding: var(--padding-ratio-l)rem var(--padding-ratio-l)rem var(--padding-ratio-l)rem 0 !important;
 }
 .p-rbl--l {
-    padding: 0 var(--base-padding-l) var(--base-padding-l) var(--base-padding-l) !important;
-    padding: 0 var(--base-padding-rem-l) var(--base-padding-rem-l) var(--base-padding-rem-l) !important;
+    padding: 0 var(--padding-l)px var(--padding-l)px var(--padding-l)px !important;
+    padding: 0 var(--padding-ratio-l)rem var(--padding-ratio-l)rem var(--padding-ratio-l)rem !important;
 }
 .p-tbl--l {
-    padding: var(--base-padding-l) 0 var(--base-padding-l) var(--base-padding-l) !important;
-    padding: var(--base-padding-rem-l) 0 var(--base-padding-rem-l) var(--base-padding-rem-l) !important;
+    padding: var(--padding-l)px 0 var(--padding-l)px var(--padding-l)px !important;
+    padding: var(--padding-ratio-l)rem 0 var(--padding-ratio-l)rem var(--padding-ratio-l)rem !important;
 }
 .p-trl--l {
-    padding: var(--base-padding-l) var(--base-padding-l) 0 var(--base-padding-l) !important;
-    padding: var(--base-padding-rem-l) var(--base-padding-rem-l) 0 var(--base-padding-rem-l) !important;
+    padding: var(--padding-l)px var(--padding-l)px 0 var(--padding-l)px !important;
+    padding: var(--padding-ratio-l)rem var(--padding-ratio-l)rem 0 var(--padding-ratio-l)rem !important;
 }
 
 

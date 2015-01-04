@@ -7,8 +7,8 @@
  */
 
 :root {
-    --base-margin: calc(var(--base-font-size) * var(--base-line-height) / 2)px;
-    --margin-rem: calc((var(--base-font-size) * var(--base-line-height) / 2) / var(--base-font-size))rem;
+    --margin: calc(var(--base-font-size) * var(--base-line-height) / 2);
+    --margin-ratio: calc((var(--base-font-size) * var(--base-line-height) / 2) / var(--base-font-size));
 }
 
 .no-m,
@@ -22,8 +22,8 @@
 }
 
 .m {
-    margin: var(--base-margin) !important;
-    margin: var(--margin-rem) !important;
+    margin: var(--margin)px !important;
+    margin: var(--margin-ratio)rem !important;
 }
 
 
@@ -31,20 +31,20 @@
 */
 
 .m-t {
-    margin-top: var(--base-margin) !important;
-    margin-top: var(--margin-rem) !important;
+    margin-top: var(--margin)px !important;
+    margin-top: var(--margin-ratio)rem !important;
 }
 .m-r {
-    margin-right: var(--base-margin) !important;
-    margin-right: var(--margin-rem) !important;
+    margin-right: var(--margin)px !important;
+    margin-right: var(--margin-ratio)rem !important;
 }
 .m-b {
-    margin-bottom: var(--base-margin) !important;
-    margin-bottom: var(--margin-rem) !important;
+    margin-bottom: var(--margin)px !important;
+    margin-bottom: var(--margin-ratio)rem !important;
 }
 .m-l {
-    margin-left: var(--base-margin) !important;
-    margin-left: var(--margin-rem) !important;
+    margin-left: var(--margin)px !important;
+    margin-left: var(--margin-ratio)rem !important;
 }
 
 
@@ -52,28 +52,28 @@
 */
 
 .m-tr {
-    margin: var(--base-margin) var(--base-margin) 0 0 !important;
-    margin: var(--margin-rem) var(--margin-rem) 0 0 !important;
+    margin: var(--margin)px var(--margin)px 0 0 !important;
+    margin: var(--margin-ratio)rem var(--margin-ratio)rem 0 0 !important;
 }
 .m-tb {
-    margin: var(--base-margin) 0 !important;
-    margin: var(--margin-rem) 0 !important;
+    margin: var(--margin)px 0 !important;
+    margin: var(--margin-ratio)rem 0 !important;
 }
 .m-tl {
-    margin: var(--base-margin) 0 0 var(--base-margin) !important;
-    margin: var(--margin-rem) 0 0 var(--margin-rem) !important;
+    margin: var(--margin)px 0 0 var(--margin)px !important;
+    margin: var(--margin-ratio)rem 0 0 var(--margin-ratio)rem !important;
 }
 .m-rb {
-    margin: 0 var(--base-margin) var(--base-margin) 0 !important;
-    margin: 0 var(--margin-rem) var(--margin-rem) 0 !important;
+    margin: 0 var(--margin)px var(--margin)px 0 !important;
+    margin: 0 var(--margin-ratio)rem var(--margin-ratio)rem 0 !important;
 }
 .m-rl {
-    margin: 0 var(--base-margin) !important;
-    margin: 0 var(--margin-rem) !important;
+    margin: 0 var(--margin)px !important;
+    margin: 0 var(--margin-ratio)rem !important;
 }
 .m-bl {
-    margin: 0 0 var(--base-margin) var(--base-margin) !important;
-    margin: 0 0 var(--margin-rem) var(--margin-rem) !important;
+    margin: 0 0 var(--margin)px var(--margin)px !important;
+    margin: 0 0 var(--margin-ratio)rem var(--margin-ratio)rem !important;
 }
 
 
@@ -81,20 +81,20 @@
 */
 
 .m-trb {
-    margin: var(--base-margin) var(--base-margin) var(--base-margin) 0 !important;
-    margin: var(--margin-rem) var(--margin-rem) var(--margin-rem) 0 !important;
+    margin: var(--margin)px var(--margin)px var(--margin)px 0 !important;
+    margin: var(--margin-ratio)rem var(--margin-ratio)rem var(--margin-ratio)rem 0 !important;
 }
 .m-rbl {
-    margin: 0 var(--base-margin) var(--base-margin) var(--base-margin) !important;
-    margin: 0 var(--margin-rem) var(--margin-rem) var(--margin-rem) !important;
+    margin: 0 var(--margin)px var(--margin)px var(--margin)px !important;
+    margin: 0 var(--margin-ratio)rem var(--margin-ratio)rem var(--margin-ratio)rem !important;
 }
 .m-tbl {
-    margin: var(--base-margin) 0 var(--base-margin) var(--base-margin) !important;
-    margin: var(--margin-rem) 0 var(--margin-rem) var(--margin-rem) !important;
+    margin: var(--margin)px 0 var(--margin)px var(--margin)px !important;
+    margin: var(--margin-ratio)rem 0 var(--margin-ratio)rem var(--margin-ratio)rem !important;
 }
 .m-trl {
-    margin: var(--base-margin) var(--base-margin) 0 var(--base-margin) !important;
-    margin: var(--margin-rem) var(--margin-rem) 0 var(--margin-rem) !important;
+    margin: var(--margin)px var(--margin)px 0 var(--margin)px !important;
+    margin: var(--margin-ratio)rem var(--margin-ratio)rem 0 var(--margin-ratio)rem !important;
 }
 
 

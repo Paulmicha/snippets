@@ -7,13 +7,13 @@
  */
 
 :root {
-    --base-padding-xl: calc(var(--base-font-size) * var(--base-line-height) * 2)px;
-    --base-padding-xl-rem: calc((var(--base-font-size) * var(--base-line-height) * 2) / var(--base-font-size))rem;
+    --padding-xl: calc(var(--base-font-size) * var(--base-line-height) * 2);
+    --padding-xl-ratio: calc((var(--base-font-size) * var(--base-line-height) * 2) / var(--base-font-size));
 }
 
 .p--xl {
-    padding: var(--base-padding-xl) !important;
-    padding: var(--base-padding-rem-xl) !important;
+    padding: var(--padding-xl)px !important;
+    padding: var(--padding-ratio-xl)rem !important;
 }
 
 
@@ -21,20 +21,20 @@
 */
 
 .p-t--xl {
-    padding-top: var(--base-padding-xl) !important;
-    padding-top: var(--base-padding-rem-xl) !important;
+    padding-top: var(--padding-xl)px !important;
+    padding-top: var(--padding-ratio-xl)rem !important;
 }
 .p-r--xl {
-    padding-right: var(--base-padding-xl) !important;
-    padding-right: var(--base-padding-rem-xl) !important;
+    padding-right: var(--padding-xl)px !important;
+    padding-right: var(--padding-ratio-xl)rem !important;
 }
 .p-b--xl {
-    padding-bottom: var(--base-padding-xl) !important;
-    padding-bottom: var(--base-padding-rem-xl) !important;
+    padding-bottom: var(--padding-xl)px !important;
+    padding-bottom: var(--padding-ratio-xl)rem !important;
 }
 .p-l--xl {
-    padding-left: var(--base-padding-xl) !important;
-    padding-left: var(--base-padding-rem-xl) !important;
+    padding-left: var(--padding-xl)px !important;
+    padding-left: var(--padding-ratio-xl)rem !important;
 }
 
 
@@ -42,28 +42,28 @@
 */
 
 .p-tr--xl {
-    padding: var(--base-padding-xl) var(--base-padding-xl) 0 0 !important;
-    padding: var(--base-padding-rem-xl) var(--base-padding-rem-xl) 0 0 !important;
+    padding: var(--padding-xl)px var(--padding-xl)px 0 0 !important;
+    padding: var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem 0 0 !important;
 }
 .p-tb--xl {
-    padding: var(--base-padding-xl) 0 !important;
-    padding: var(--base-padding-rem-xl) 0 !important;
+    padding: var(--padding-xl)px 0 !important;
+    padding: var(--padding-ratio-xl)rem 0 !important;
 }
 .p-tl--xl {
-    padding: var(--base-padding-xl) 0 0 var(--base-padding-xl) !important;
-    padding: var(--base-padding-rem-xl) 0 0 var(--base-padding-rem-xl) !important;
+    padding: var(--padding-xl)px 0 0 var(--padding-xl)px !important;
+    padding: var(--padding-ratio-xl)rem 0 0 var(--padding-ratio-xl)rem !important;
 }
 .p-rb--xl {
-    padding: 0 var(--base-padding-xl) var(--base-padding-xl) 0 !important;
-    padding: 0 var(--base-padding-rem-xl) var(--base-padding-rem-xl) 0 !important;
+    padding: 0 var(--padding-xl)px var(--padding-xl)px 0 !important;
+    padding: 0 var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem 0 !important;
 }
 .p-rl--xl {
-    padding: 0 var(--base-padding-xl) !important;
-    padding: 0 var(--base-padding-rem-xl) !important;
+    padding: 0 var(--padding-xl)px !important;
+    padding: 0 var(--padding-ratio-xl)rem !important;
 }
 .p-bl--xl {
-    padding: 0 0 var(--base-padding-xl) var(--base-padding-xl) !important;
-    padding: 0 0 var(--base-padding-rem-xl) var(--base-padding-rem-xl) !important;
+    padding: 0 0 var(--padding-xl)px var(--padding-xl)px !important;
+    padding: 0 0 var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem !important;
 }
 
 
@@ -71,20 +71,20 @@
 */
 
 .p-trb--xl {
-    padding: var(--base-padding-xl) var(--base-padding-xl) var(--base-padding-xl) 0 !important;
-    padding: var(--base-padding-rem-xl) var(--base-padding-rem-xl) var(--base-padding-rem-xl) 0 !important;
+    padding: var(--padding-xl)px var(--padding-xl)px var(--padding-xl)px 0 !important;
+    padding: var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem 0 !important;
 }
 .p-rbl--xl {
-    padding: 0 var(--base-padding-xl) var(--base-padding-xl) var(--base-padding-xl) !important;
-    padding: 0 var(--base-padding-rem-xl) var(--base-padding-rem-xl) var(--base-padding-rem-xl) !important;
+    padding: 0 var(--padding-xl)px var(--padding-xl)px var(--padding-xl)px !important;
+    padding: 0 var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem !important;
 }
 .p-tbl--xl {
-    padding: var(--base-padding-xl) 0 var(--base-padding-xl) var(--base-padding-xl) !important;
-    padding: var(--base-padding-rem-xl) 0 var(--base-padding-rem-xl) var(--base-padding-rem-xl) !important;
+    padding: var(--padding-xl)px 0 var(--padding-xl)px var(--padding-xl)px !important;
+    padding: var(--padding-ratio-xl)rem 0 var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem !important;
 }
 .p-trl--xl {
-    padding: var(--base-padding-xl) var(--base-padding-xl) 0 var(--base-padding-xl) !important;
-    padding: var(--base-padding-rem-xl) var(--base-padding-rem-xl) 0 var(--base-padding-rem-xl) !important;
+    padding: var(--padding-xl)px var(--padding-xl)px 0 var(--padding-xl)px !important;
+    padding: var(--padding-ratio-xl)rem var(--padding-ratio-xl)rem 0 var(--padding-ratio-xl)rem !important;
 }
 
 
