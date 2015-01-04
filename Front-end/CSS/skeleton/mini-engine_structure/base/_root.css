@@ -13,7 +13,7 @@
             @todo use https://github.com/songawee/px_to_rem
     */
     --base-font-size-ratio: 1;
-    --base-font-size: calc(var(--base-ratio) * 16);
+    --base-font-size: calc(var(--base-font-size-ratio) * 16);
     --base-line-height: 1.5; /* Note : this is a ratio */
     
     /*      With the use of rem or em units, this allows to "propagate"
