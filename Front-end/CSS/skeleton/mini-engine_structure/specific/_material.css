@@ -1,0 +1,133 @@
+
+/**
+ *  @file
+ *  Specific styles
+ */
+
+.Material {
+    position:relative;
+    margin: 2em auto 1em auto;
+    padding-bottom: 1em;
+}
+
+.Material input {
+    /*font-size: 18px;*/
+    /*padding: 10px 10px 10px 5px;*/
+    padding: .625em .625em .625em .3125em;
+    display: block;
+    width: 100%;
+    border: 0 none;
+    border-bottom: 1px solid #ff0056;
+    background-color: transparent;
+}
+.Material input:focus {
+    outline:none;
+}
+
+.Material.not-required label,
+#main-content .Material.not-required label,
+.Material label {
+    position: absolute;
+    pointer-events:  none;
+    left: .3125em;
+    top: .625em;
+    transition: 0.2s ease all; 
+    -moz-transition: 0.2s ease all; 
+    -webkit-transition: 0.2s ease all;
+    
+    font-weight: normal;
+    text-transform: uppercase;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    color: inherit;
+}
+
+#main-content .Material input:focus + label,
+#main-content .Material input:focus ~ label,
+.Material input:focus + label,
+.Material input:focus ~ label,
+.Material input:valid + label,
+.Material input:valid ~ label {
+  top: -1.25em;
+  color: #ff0056;
+}
+
+
+
+/* BOTTOM BARS ================================= */
+
+.Material .bar {
+    position: relative;
+    display: block;
+    /*width: 18.75em;*/
+    width: 100%;
+}
+
+.Material .bar:before,
+.Material .bar:after {
+    content: '';
+    height: .125em; 
+    width: 0;
+    bottom: .0625em; 
+    position: absolute;
+    background: #ff0056; 
+    transition: 0.2s ease all; 
+    -moz-transition: 0.2s ease all; 
+    -webkit-transition: 0.2s ease all;
+}
+.Material .bar:before {
+    left: 50%;
+}
+.Material .bar:after {
+    right: 50%; 
+}
+
+.Material input:focus + .bar:before,
+.Material input:focus ~ .bar:before,
+.Material input:focus + .bar:after,
+.Material input:focus ~ .bar:after {
+    width: 50%;
+}
+
+
+
+/* HIGHLIGHTER ================================== */
+
+/*
+.Material .highlight {
+    position: absolute;
+    height: 60%; 
+    width: 6.25em; 
+    top: 25%; 
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.Material input:focus ~ .highlight,
+.Material input:focus + .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+*/
+
+
+/* ANIMATIONS ================ */
+
+/*
+@-webkit-keyframes inputHighlighter {
+    from { background: #ff0056; }
+    to { width: 0; background: transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background: #ff0056; }
+    to { width: 0; background: transparent; }
+}
+@keyframes inputHighlighter {
+    from { background: #ff0056; }
+    to { width: 0; background: transparent; }
+}
+*/
+
+

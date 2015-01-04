@@ -1,0 +1,24 @@
+
+/**
+ *  @file
+ *  Lobotomized Owls
+ *  @see http://alistapart.com/article/axiomatic-css-and-lobotomized-owls
+ *  
+ *  update 2014/12/27 22:23:00 - abandonned (too much "unsetting" work, for ex. every inline list items, etc.)
+ */
+
+/*
+
+* + * {
+    margin-top: 1.5em;
+}
+
+.owl-compact * + * {
+	margin-top: 0.75em;
+}
+
+.owl-off > * {
+	margin-top: 0;
+}
+
+*/

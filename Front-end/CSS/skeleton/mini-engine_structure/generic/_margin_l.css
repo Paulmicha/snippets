@@ -1,0 +1,90 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/songawee/px_to_rem
+ */
+
+:root {
+    --margin-l: calc(var(--base-font-size) * var(--base-line-height))px;
+    --margin-l-rem: calc((var(--base-font-size) * var(--base-line-height)) / var(--base-font-size))rem;
+}
+
+.m--l {
+    margin: var(--margin-l) !important;
+    margin: var(--margin-rem-l) !important;
+}
+
+
+/*      Directions
+*/
+
+.m-t--l {
+    margin-top: var(--margin-l) !important;
+    margin-top: var(--margin-rem-l) !important;
+}
+.m-r--l {
+    margin-right: var(--margin-l) !important;
+    margin-right: var(--margin-rem-l) !important;
+}
+.m-b--l {
+    margin-bottom: var(--margin-l) !important;
+    margin-bottom: var(--margin-rem-l) !important;
+}
+.m-l--l {
+    margin-left: var(--margin-l) !important;
+    margin-left: var(--margin-rem-l) !important;
+}
+
+
+/*      Combined Directions (2)
+*/
+
+.m-tr--l {
+    margin: var(--margin-l) var(--margin-l) 0 0 !important;
+    margin: var(--margin-rem-l) var(--margin-rem-l) 0 0 !important;
+}
+.m-tb--l {
+    margin: var(--margin-l) 0 !important;
+    margin: var(--margin-rem-l) 0 !important;
+}
+.m-tl--l {
+    margin: var(--margin-l) 0 0 var(--margin-l) !important;
+    margin: var(--margin-rem-l) 0 0 var(--margin-rem-l) !important;
+}
+.m-rb--l {
+    margin: 0 var(--margin-l) var(--margin-l) 0 !important;
+    margin: 0 var(--margin-rem-l) var(--margin-rem-l) 0 !important;
+}
+.m-rl--l {
+    margin: 0 var(--margin-l) !important;
+    margin: 0 var(--margin-rem-l) !important;
+}
+.m-bl--l {
+    margin: 0 0 var(--margin-l) var(--margin-l) !important;
+    margin: 0 0 var(--margin-rem-l) var(--margin-rem-l) !important;
+}
+
+
+/*      Combined Directions (3)
+*/
+
+.m-trb--l {
+    margin: var(--margin-l) var(--margin-l) var(--margin-l) 0 !important;
+    margin: var(--margin-rem-l) var(--margin-rem-l) var(--margin-rem-l) 0 !important;
+}
+.m-rbl--l {
+    margin: 0 var(--margin-l) var(--margin-l) var(--margin-l) !important;
+    margin: 0 var(--margin-rem-l) var(--margin-rem-l) var(--margin-rem-l) !important;
+}
+.m-tbl--l {
+    margin: var(--margin-l) 0 var(--margin-l) var(--margin-l) !important;
+    margin: var(--margin-rem-l) 0 var(--margin-rem-l) var(--margin-rem-l) !important;
+}
+.m-trl--l {
+    margin: var(--margin-l) var(--margin-l) 0 var(--margin-l) !important;
+    margin: var(--margin-rem-l) var(--margin-rem-l) 0 var(--margin-rem-l) !important;
+}
+
+

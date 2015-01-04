@@ -1,0 +1,100 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/songawee/px_to_rem
+ */
+
+:root {
+    --base-padding: calc(var(--base-font-size) * var(--base-line-height) / 2)px;
+    --base-padding-rem: calc((var(--base-font-size) * var(--base-line-height) / 2) / var(--base-font-size))rem;
+}
+
+.no-p,
+.p-reset,
+.no-padding {
+    padding: 0 !important;
+}
+.p-center {
+    padding-right: auto !important;
+    padding-left: auto !important;
+}
+
+.p {
+    padding: var(--base-padding) !important;
+    padding: var(--base-padding-rem) !important;
+}
+
+
+/*      Directions
+*/
+
+.p-t {
+    padding-top: var(--base-padding) !important;
+    padding-top: var(--base-padding-rem) !important;
+}
+.p-r {
+    padding-right: var(--base-padding) !important;
+    padding-right: var(--base-padding-rem) !important;
+}
+.p-b {
+    padding-bottom: var(--base-padding) !important;
+    padding-bottom: var(--base-padding-rem) !important;
+}
+.p-l {
+    padding-left: var(--base-padding) !important;
+    padding-left: var(--base-padding-rem) !important;
+}
+
+
+/*      Combined Directions (2)
+*/
+
+.p-tr {
+    padding: var(--base-padding) var(--base-padding) 0 0 !important;
+    padding: var(--base-padding-rem) var(--base-padding-rem) 0 0 !important;
+}
+.p-tb {
+    padding: var(--base-padding) 0 !important;
+    padding: var(--base-padding-rem) 0 !important;
+}
+.p-tl {
+    padding: var(--base-padding) 0 0 var(--base-padding) !important;
+    padding: var(--base-padding-rem) 0 0 var(--base-padding-rem) !important;
+}
+.p-rb {
+    padding: 0 var(--base-padding) var(--base-padding) 0 !important;
+    padding: 0 var(--base-padding-rem) var(--base-padding-rem) 0 !important;
+}
+.p-rl {
+    padding: 0 var(--base-padding) !important;
+    padding: 0 var(--base-padding-rem) !important;
+}
+.p-bl {
+    padding: 0 0 var(--base-padding) var(--base-padding) !important;
+    padding: 0 0 var(--base-padding-rem) var(--base-padding-rem) !important;
+}
+
+
+/*      Combined Directions (3)
+*/
+
+.p-trb {
+    padding: var(--base-padding) var(--base-padding) var(--base-padding) 0 !important;
+    padding: var(--base-padding-rem) var(--base-padding-rem) var(--base-padding-rem) 0 !important;
+}
+.p-rbl {
+    padding: 0 var(--base-padding) var(--base-padding) var(--base-padding) !important;
+    padding: 0 var(--base-padding-rem) var(--base-padding-rem) var(--base-padding-rem) !important;
+}
+.p-tbl {
+    padding: var(--base-padding) 0 var(--base-padding) var(--base-padding) !important;
+    padding: var(--base-padding-rem) 0 var(--base-padding-rem) var(--base-padding-rem) !important;
+}
+.p-trl {
+    padding: var(--base-padding) var(--base-padding) 0 var(--base-padding) !important;
+    padding: var(--base-padding-rem) var(--base-padding-rem) 0 var(--base-padding-rem) !important;
+}
+
+

@@ -1,0 +1,78 @@
+
+/**
+ *  @file
+ *  Base styles
+ *  (=reset/normalize, raw HTML tags styles only)
+ *  @see https://github.com/paulrobertlloyd/barebones
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: .25em 0;
+   -webkit-font-smoothing: antialiased;
+
+    font-style: italic;
+    font-weight: 400;
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+    margin-top: 0;
+}
+
+h1 {
+    color: #222;
+    font-weight: 700;
+    font-size: 2em; /* 32px */
+    line-height: 1;
+}
+h2,
+article > h1,
+section > h1,
+nav > h1 {
+    font-size: 1.5em; /* 24px */
+    font-size: 4em;
+    line-height: 1; /* 24px */
+    font-weight: 700;
+    color: #333;
+}
+h3,
+legend,
+article article > h1,
+article section > h1,
+section section > h1,
+section article > h1 {
+    font-size: 1.3125em; /* 21px */
+    line-height: 1.1429; /* 24px */
+    color: #333;
+    font-weight: 400;
+}
+h4 {
+    color: #444;
+    font-weight: 400;
+    font-size: 1.125em; /* 18px */
+    line-height: 1.3334; /* 24px */
+}
+h5 {
+    color: #555;
+    font-weight: 700;
+    font-size: 1em; /* 16px */
+    line-height: 1; /* 16px */
+}
+h6 {
+    color: #666;
+    font-weight: 700;
+    font-size: 0.875em; /* 14px */
+    line-height: 1.1429; /* 16px */
+    text-transform: uppercase;
+    letter-spacing: 0.1429em; /* 2px */
+}
+

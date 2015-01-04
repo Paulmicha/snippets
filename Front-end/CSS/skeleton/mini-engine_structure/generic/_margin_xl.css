@@ -1,0 +1,90 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/songawee/px_to_rem
+ */
+
+:root {
+    --margin-xl: calc(var(--base-font-size) * var(--base-line-height) * 2)px;
+    --margin-xl-rem: calc((var(--base-font-size) * var(--base-line-height) * 2) / var(--base-font-size))rem;
+}
+
+.m--xl {
+    margin: var(--margin-xl) !important;
+    margin: var(--margin-rem-xl) !important;
+}
+
+
+/*      Directions
+*/
+
+.m-t--xl {
+    margin-top: var(--margin-xl) !important;
+    margin-top: var(--margin-rem-xl) !important;
+}
+.m-r--xl {
+    margin-right: var(--margin-xl) !important;
+    margin-right: var(--margin-rem-xl) !important;
+}
+.m-b--xl {
+    margin-bottom: var(--margin-xl) !important;
+    margin-bottom: var(--margin-rem-xl) !important;
+}
+.m-l--xl {
+    margin-left: var(--margin-xl) !important;
+    margin-left: var(--margin-rem-xl) !important;
+}
+
+
+/*      Combined Directions (2)
+*/
+
+.m-tr--xl {
+    margin: var(--margin-xl) var(--margin-xl) 0 0 !important;
+    margin: var(--margin-rem-xl) var(--margin-rem-xl) 0 0 !important;
+}
+.m-tb--xl {
+    margin: var(--margin-xl) 0 !important;
+    margin: var(--margin-rem-xl) 0 !important;
+}
+.m-tl--xl {
+    margin: var(--margin-xl) 0 0 var(--margin-xl) !important;
+    margin: var(--margin-rem-xl) 0 0 var(--margin-rem-xl) !important;
+}
+.m-rb--xl {
+    margin: 0 var(--margin-xl) var(--margin-xl) 0 !important;
+    margin: 0 var(--margin-rem-xl) var(--margin-rem-xl) 0 !important;
+}
+.m-rl--xl {
+    margin: 0 var(--margin-xl) !important;
+    margin: 0 var(--margin-rem-xl) !important;
+}
+.m-bl--xl {
+    margin: 0 0 var(--margin-xl) var(--margin-xl) !important;
+    margin: 0 0 var(--margin-rem-xl) var(--margin-rem-xl) !important;
+}
+
+
+/*      Combined Directions (3)
+*/
+
+.m-trb--xl {
+    margin: var(--margin-xl) var(--margin-xl) var(--margin-xl) 0 !important;
+    margin: var(--margin-rem-xl) var(--margin-rem-xl) var(--margin-rem-xl) 0 !important;
+}
+.m-rbl--xl {
+    margin: 0 var(--margin-xl) var(--margin-xl) var(--margin-xl) !important;
+    margin: 0 var(--margin-rem-xl) var(--margin-rem-xl) var(--margin-rem-xl) !important;
+}
+.m-tbl--xl {
+    margin: var(--margin-xl) 0 var(--margin-xl) var(--margin-xl) !important;
+    margin: var(--margin-rem-xl) 0 var(--margin-rem-xl) var(--margin-rem-xl) !important;
+}
+.m-trl--xl {
+    margin: var(--margin-xl) var(--margin-xl) 0 var(--margin-xl) !important;
+    margin: var(--margin-rem-xl) var(--margin-rem-xl) 0 var(--margin-rem-xl) !important;
+}
+
+

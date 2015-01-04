@@ -1,0 +1,14 @@
+
+/**
+ *  @file
+ *  Generic styles
+ */
+
+.Rounded,
+.Rounded--children > *,
+.Rounded--descendants *,
+.Rounded--child-img > img,
+.Rounded--descendant-img img {
+    border-radius: 100% !important;
+}
+

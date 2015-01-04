@@ -1,0 +1,79 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/songawee/px_to_rem
+ */
+
+:root {
+    --font-weight-bold: 700;
+    
+    --font-size-s-ratio: .8;
+    --font-size-s: calc(var(--base-font-size) * var(--font-size-s-ratio));
+    --font-size-m-ratio: 1.25;
+    --font-size-m: calc(var(--base-font-size) * var(--font-size-m-ratio));
+    --font-size-l-ratio: 1.5;
+    --font-size-l: calc(var(--base-font-size) * var(--font-size-l-ratio));
+    --font-size-xl-ratio: 2;
+    --font-size-xl: calc(var(--base-font-size) * var(--font-size-xl-ratio));
+}
+
+
+/*      Styles
+        @todo smallcaps
+        @todo kerning ?
+        @todo text-indent ?
+        @todo letter-spacing ?
+*/
+
+.u-bold {
+    font-weight: var(--font-weight-bold) !important;
+}
+.u-italic {
+    font-style: italic !important;
+}
+.u-uppercase {
+    text-transform: uppercase !important;
+}
+
+
+/*      Sizes
+*/
+
+.u-fontSize-reset {
+    font-size: var(--base-font-size)px !important;
+    font-size: var(--base-font-size-ratio)rem !important;
+}
+
+.u-fontSize-s {
+    font-size: var(--font-size-s)px !important;
+    font-size: var(--font-size-s-ratio)rem !important;
+}
+.u-fontSize-m {
+    font-size: var(--font-size-m)px !important;
+    font-size: var(--font-size-m-ratio)rem !important;
+}
+.u-fontSize-l {
+    font-size: var(--font-size-l)px !important;
+    font-size: var(--font-size-l-ratio)rem !important;
+}
+.u-fontSize-xl {
+    font-size: var(--font-size-xl)px !important;
+    font-size: var(--font-size-xl-ratio)rem !important;
+}
+
+
+/*      Sizes in %
+*/
+
+.u-fontSize-3of2x {
+    font-size: 150% !important;
+}
+.u-fontSize-2x {
+    font-size: 200% !important;
+}
+.u-fontSize-3x {
+    font-size: 300% !important;
+}
+

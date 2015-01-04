@@ -1,0 +1,61 @@
+
+/**
+ *  @file
+ *  Base styles
+ *  (=reset/normalize, raw HTML tags styles only)
+ *  @see https://github.com/paulrobertlloyd/barebones
+ */
+
+:root {
+    
+    /*      var(--base-font-size) and var(--base-line-height) are Fundamental Typographic values :
+            they will be used to determine many proportions. They are unitless values on purpose.
+            @todo use https://github.com/songawee/px_to_rem
+    */
+    --base-font-size-ratio: 1;
+    --base-font-size: calc(var(--base-ratio) * 16);
+    --base-line-height: 1.5; /* Note : this is a ratio */
+    
+    /*      With the use of rem or em units, this allows to "propagate"
+            responsive changes in size automatically - for ex. to margins, paddings, etc.
+            @see mandatory custom media queries declaration
+    */
+    --sm-base-font-size: 90%;
+    --xl-base-font-size: 115%;
+    
+    --base-font-family: Helvetica, sans-serif;
+    --base-font-weight: 400;
+    --base-text-color: #444;
+    --base-background: transparent;
+    --body-margin: 0 auto;
+    --body-background: transparent;
+}
+
+
+/*      Note the absence of "root" font-size declaration
+        @see http://www.filamentgroup.com/lab/how-we-learned-to-leave-body-font-size-alone.html
+*/
+html {
+    background: var(--base-background);
+    font-family: var(--base-font-family);
+    font-weight: var(--base-font-weight);
+    color: var(--base-text-color);
+    text-rendering: optimizeLegibility;
+}
+@media (--sm-viewport) {
+    html {
+        font-size: var(--sm-base-font-size);
+    }
+}
+@media (--xl-viewport) {
+    html {
+        font-size: var(--xl-base-font-size);
+    }
+}
+
+body {
+    margin: var(--body-margin);
+    background: var(--body-background);
+}
+
+

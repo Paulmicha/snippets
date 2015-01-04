@@ -1,0 +1,90 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/songawee/px_to_rem
+ */
+
+:root {
+    --base-padding-l: calc(var(--base-font-size) * var(--base-line-height))px;
+    --base-padding-l-rem: calc((var(--base-font-size) * var(--base-line-height)) / var(--base-font-size))rem;
+}
+
+.p--l {
+    padding: var(--base-padding-l) !important;
+    padding: var(--base-padding-rem-l) !important;
+}
+
+
+/*      Directions
+*/
+
+.p-t--l {
+    padding-top: var(--base-padding-l) !important;
+    padding-top: var(--base-padding-rem-l) !important;
+}
+.p-r--l {
+    padding-right: var(--base-padding-l) !important;
+    padding-right: var(--base-padding-rem-l) !important;
+}
+.p-b--l {
+    padding-bottom: var(--base-padding-l) !important;
+    padding-bottom: var(--base-padding-rem-l) !important;
+}
+.p-l--l {
+    padding-left: var(--base-padding-l) !important;
+    padding-left: var(--base-padding-rem-l) !important;
+}
+
+
+/*      Combined Directions (2)
+*/
+
+.p-tr--l {
+    padding: var(--base-padding-l) var(--base-padding-l) 0 0 !important;
+    padding: var(--base-padding-rem-l) var(--base-padding-rem-l) 0 0 !important;
+}
+.p-tb--l {
+    padding: var(--base-padding-l) 0 !important;
+    padding: var(--base-padding-rem-l) 0 !important;
+}
+.p-tl--l {
+    padding: var(--base-padding-l) 0 0 var(--base-padding-l) !important;
+    padding: var(--base-padding-rem-l) 0 0 var(--base-padding-rem-l) !important;
+}
+.p-rb--l {
+    padding: 0 var(--base-padding-l) var(--base-padding-l) 0 !important;
+    padding: 0 var(--base-padding-rem-l) var(--base-padding-rem-l) 0 !important;
+}
+.p-rl--l {
+    padding: 0 var(--base-padding-l) !important;
+    padding: 0 var(--base-padding-rem-l) !important;
+}
+.p-bl--l {
+    padding: 0 0 var(--base-padding-l) var(--base-padding-l) !important;
+    padding: 0 0 var(--base-padding-rem-l) var(--base-padding-rem-l) !important;
+}
+
+
+/*      Combined Directions (3)
+*/
+
+.p-trb--l {
+    padding: var(--base-padding-l) var(--base-padding-l) var(--base-padding-l) 0 !important;
+    padding: var(--base-padding-rem-l) var(--base-padding-rem-l) var(--base-padding-rem-l) 0 !important;
+}
+.p-rbl--l {
+    padding: 0 var(--base-padding-l) var(--base-padding-l) var(--base-padding-l) !important;
+    padding: 0 var(--base-padding-rem-l) var(--base-padding-rem-l) var(--base-padding-rem-l) !important;
+}
+.p-tbl--l {
+    padding: var(--base-padding-l) 0 var(--base-padding-l) var(--base-padding-l) !important;
+    padding: var(--base-padding-rem-l) 0 var(--base-padding-rem-l) var(--base-padding-rem-l) !important;
+}
+.p-trl--l {
+    padding: var(--base-padding-l) var(--base-padding-l) 0 var(--base-padding-l) !important;
+    padding: var(--base-padding-rem-l) var(--base-padding-rem-l) 0 var(--base-padding-rem-l) !important;
+}
+
+

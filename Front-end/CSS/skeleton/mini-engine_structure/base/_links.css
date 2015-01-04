@@ -1,0 +1,45 @@
+
+/**
+ *  @file
+ *  Base styles
+ *  (=reset/normalize, raw HTML tags styles only)
+ *  @see https://github.com/paulrobertlloyd/barebones
+ */
+
+a {
+    color: #ff0056;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 0, 86, 0.2);
+    transition: all 0.2s ease;
+}
+
+/*
+a:visited {
+    color: #D34797;
+}
+*/
+
+a:focus {
+    outline: 2px solid rgba(255, 0, 86, 0.1);
+}
+
+a:hover {
+    color: red;
+    border-bottom-color: rgba(255,0,0,0.2);
+}
+
+/*
+a:link, a:visited, a:hover {
+    transition: all 0.17s ease;
+}
+*/
+
+/*
+a:active {
+    color: #d25;
+    border-bottom: 1px solid rgba(221,34,85,0.25);
+    transition: none;
+}
+*/
+
+
