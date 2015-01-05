@@ -59,12 +59,28 @@ jQuery.fn.proxify = function(options)
         //      @evol introduce variants - ex: using one() To attach an event that runs only once and then removes itself
         if (properties.evt_types && properties.target)
         {
-            var $target = $(properties.target);
+            //      Allow the use of closest() for finding targets
+            //      @see http://api.jquery.com/closest/
+            if (properties.closest) {
+                var $target = $this.closest(properties.target);
+            }
+            else {
+                var $target = $(properties.target);
+            }
+            
             if ($target.length)
             {
                 //      Init defaults
                 if (!properties.toggle_class) {
                     properties.toggle_class = "is-active";
+                }
+                
+                //      Handle cursor on targets when pointer events are proxied
+                //      + provide an option to opt it out
+                if (!properties.no_cursor
+                    && (properties.evt_types.match(/click/g)
+                    || properties.evt_types.match(/mouse/g))) {
+                    $target.css('cursor', 'pointer');
                 }
                 
                 //      Keep stuff for later use
