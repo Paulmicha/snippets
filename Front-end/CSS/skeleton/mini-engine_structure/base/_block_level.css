@@ -4,18 +4,32 @@
  *  Base styles
  *  (=reset/normalize, raw HTML tags styles only)
  *  @see https://github.com/paulrobertlloyd/barebones
+ *  
+ *  @todo use https://github.com/songawee/px_to_rem
  */
 
+/*      [1] : @see generic/_margin.css (identical var, duplicate declaration)
+        [2] : @see generic/_padding.css (identical var, duplicate declaration)
+*/
 :root {
-    --block-margin: .5em;
+    --margin: calc(var(--font-size) * var(--line-height) / 2); /* [1] */
+    --margin-ratio: calc(var(--line-height) / 2); /* [1] */
+    --padding: calc(var(--font-size) * var(--line-height) / 2); /* [2] */
+    --padding-ratio: calc(var(--line-height) / 2); /* [2] */
 }
 
+
 header {
-    margin-bottom: var(--block-margin);
+    margin-bottom: calc(var(--margin) * 2)px;
+    margin-bottom: calc(var(--margin-ratio) * 2)rem;
 }
 footer {
-    margin-top: var(--block-margin);
-    padding-top: var(--block-margin);
+    margin-top: var(--margin)px;
+    margin-top: var(--margin-ratio)rem;
+    /*
+    padding-top: var(--padding)px;
+    padding-top: var(--padding-ratio)rem;
+    */
 }
 nav ul {
     margin: 0;
@@ -34,10 +48,12 @@ table,
 fieldset,
 details {
     font-size: 1em;
-    line-height: var(--base-line-height);
-    margin: var(--block-margin) 0;
+    line-height: var(--line-height);
+    margin: var(--margin)px 0;
+    margin: var(--margin-ratio)rem 0;
 }
 
+/*      This is commented out for trying to have a vertical rythm by default
 p:first-child,
 pre:first-child,
 blockquote:first-child,
@@ -51,16 +67,16 @@ fieldset:first-child,
 details:first-child {
     margin-top: 0;
 }
+*/
 
 hr {
     font-weight: 700;
-    font-size: 2em; /* 32px */
-    line-height: 1; /* 32px */
+    font-size: 2em;
+    line-height: 1;
     text-align: center;
-    margin: .25em 0 .5em; /* 0 0 32px */
     border: 0;
-    padding: 0;
-    height: 0;
+    margin: var(--margin)px 0;
+    margin: var(--margin-ratio)rem 0;
     clear: both;
     display: block;
     }
@@ -68,32 +84,40 @@ hr {
         content: "···";
         color: #bbb;
         letter-spacing: 1em;
-        padding-left: 1em;
         height: 0;
     }
 pre {
-    margin-left: 1.5em; /* 24px */
+    margin-left: var(--margin)px;
+    margin-left: var(--margin-ratio)rem;
     white-space:  pre-wrap;
     }
+    /*
     pre code,
     pre samp {
         line-height: 1.5;
     }
+    */
 blockquote {
     color: #666;
-    font-size: 1em; /* 16px */
-    line-height: 1.5; /* 32px */
+    font-size: 1em;
+    /*
+    line-height: 1.5;
+    */
     border-left: 0.25em solid #e9e9e9;
-    padding: 0 1.5em 0 1em; /* 0 24px 0 16px */
+    padding: 0 var(--padding-l)px 0 var(--padding)px;
+    padding: 0 var(--padding-ratio-l)rem 0 var(--padding-ratio)rem;
     }
+    /*
     blockquote p {
-        line-height: 1.25; /* 20px */
-        margin: 0.5em 0; /* 8px 0 */
+        line-height: 1.25; /* 20px *
+        margin: 0.5em 0; /* 8px 0 *
     }
+    */
 
 /* Grouping > Lists */
 ol {
     list-style-type: decimal;
+    list-style-position: inside;
     padding: 0;
 }
 ul {
@@ -105,7 +129,8 @@ ul {
     ul ol,
     ol ol,
     ul ul {
-        margin-left: 1em;
+        margin-left: var(--margin)px;
+        margin-left: var(--margin-ratio)rem;
     }
     ul li li {
         list-style-type: square;
@@ -113,10 +138,13 @@ ul {
 dt {
     font-size: 1em; /* 16px */
     font-weight: 700;
-    line-height: 1.25; /* 20px */
+    /*
+    line-height: 1.25; /* 20px *
+    */
 }
 dd {
-    margin-left: 1.5em; /* 24px */
+    margin-left: var(--margin)px;
+    margin-left: var(--margin-ratio)rem;
     }
     /*
     dd > *,
@@ -128,9 +156,15 @@ dd {
 /* Grouping > Figures */
 figcaption {
     color: #999;
-    font-size: 0.75em; /* 12px */
-    line-height: 1.3334; /* 16px */
-    padding: 0.6667em 0; /* 8px 0 */
+    /*
+    font-size: 0.75em; /* 12px *
+    line-height: 1.3334; /* 16px *
+    padding: 0.6667em 0; /* 8px 0 *
+    */
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-s);
+    padding: var(--padding-ratio-s)px 0;
+    padding: var(--padding-s)rem 0;
     clear: left;
 }
 blockquote + figcaption::before {

@@ -7,8 +7,8 @@
  */
 
 :root {
-    --margin-xl: calc(var(--base-font-size) * var(--base-line-height) * 2);
-    --margin-ratio-xl: calc((var(--base-font-size) * var(--base-line-height) * 2) / var(--base-font-size));
+    --margin-xl: calc(var(--font-size) * var(--line-height) * 2);
+    --margin-ratio-xl: calc(var(--line-height) * 2);
 }
 
 .m--xl {

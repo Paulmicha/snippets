@@ -8,25 +8,25 @@
 
 :root {
     
-    /*      var(--base-font-size) and var(--base-line-height) are Fundamental Typographic values :
+    /*      var(--font-size) and var(--line-height) are Fundamental Typographic values :
             they will be used to determine many proportions. They are unitless values on purpose.
             @todo use https://github.com/songawee/px_to_rem
     */
-    --base-font-size-ratio: 1;
-    --base-font-size: calc(var(--base-font-size-ratio) * 16);
-    --base-line-height: 1.5; /* Note : this is a ratio */
+    --font-size-ratio: 1;
+    --font-size: calc(var(--font-size-ratio) * 16);
+    --line-height: 1.5; /* Note : this is a ratio */
     
     /*      With the use of rem or em units, this allows to "propagate"
             responsive changes in size automatically - for ex. to margins, paddings, etc.
             @see mandatory custom media queries declaration
     */
-    --sm-base-font-size: 90%;
-    --xl-base-font-size: 115%;
+    --sm-font-size-modifier: 90%;
+    --xl-font-size-modifier: 115%;
     
-    --base-font-family: Helvetica, sans-serif;
-    --base-font-weight: 400;
-    --base-text-color: #444;
-    --base-background: transparent;
+    --font-family: Helvetica, sans-serif;
+    --font-weight: 400;
+    --text-color: #444;
+    --html-background: transparent;
     --body-margin: 0 auto;
     --body-background: transparent;
 }
@@ -36,20 +36,20 @@
         @see http://www.filamentgroup.com/lab/how-we-learned-to-leave-body-font-size-alone.html
 */
 html {
-    background: var(--base-background);
-    font-family: var(--base-font-family);
-    font-weight: var(--base-font-weight);
-    color: var(--base-text-color);
+    background: var(--html-background);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    color: var(--text-color);
     text-rendering: optimizeLegibility;
 }
 @media (--sm-viewport) {
     html {
-        font-size: var(--sm-base-font-size);
+        font-size: var(--sm-font-size-modifier);
     }
 }
 @media (--xl-viewport) {
     html {
-        font-size: var(--xl-base-font-size);
+        font-size: var(--xl-font-size-modifier);
     }
 }
 

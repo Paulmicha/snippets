@@ -7,8 +7,8 @@
  */
 
 :root {
-    --margin-s: calc(var(--base-font-size) * var(--base-line-height) / 3)px;
-    --margin-ratio-s: calc((var(--base-font-size) * var(--base-line-height) / 3) / var(--base-font-size));
+    --margin-s: calc(var(--font-size) * var(--line-height) / 3);
+    --margin-ratio-s: calc(var(--line-height) / 3);
 }
 
 .m--s {

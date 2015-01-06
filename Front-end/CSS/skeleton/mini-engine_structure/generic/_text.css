@@ -9,19 +9,30 @@
 :root {
     --font-weight-bold: 700;
     
-    --font-size-s-ratio: .8;
-    --font-size-s: calc(var(--base-font-size) * var(--font-size-s-ratio));
-    --font-size-m-ratio: 1.25;
-    --font-size-m: calc(var(--base-font-size) * var(--font-size-m-ratio));
-    --font-size-l-ratio: 1.5;
-    --font-size-l: calc(var(--base-font-size) * var(--font-size-l-ratio));
-    --font-size-xl-ratio: 2;
-    --font-size-xl: calc(var(--base-font-size) * var(--font-size-xl-ratio));
+    --font-size-ratio-xs: .75;
+    --font-size-xs: calc(var(--font-size) * var(--font-size-ratio-xs));
+    --line-height-xs: var(--line-height);
+    
+    --font-size-ratio-s: .9;
+    --font-size-s: calc(var(--font-size) * var(--font-size-ratio-s));
+    --line-height-s: var(--line-height);
+    
+    --font-size-ratio-m: 1.25;
+    --font-size-m: calc(var(--font-size) * var(--font-size-ratio-m));
+    --line-height-m: var(--line-height);
+    
+    --font-size-ratio-l: 1.5;
+    --font-size-l: calc(var(--font-size) * var(--font-size-ratio-l));
+    --line-height-l: 1.2;
+    
+    --font-size-ratio-xl: 2;
+    --font-size-xl: calc(var(--font-size) * var(--font-size-ratio-xl));
+    --line-height-xl: 1.1;
 }
 
 
 /*      Styles
-        @todo smallcaps
+        @todo smallcaps ?
         @todo kerning ?
         @todo text-indent ?
         @todo letter-spacing ?
@@ -39,34 +50,52 @@
 
 
 /*      Sizes
+        [1] : @require base/_root.css (externally defined variable reference = dependency)
+        [2] : do not enforce line-height for easier contextual "overridability"
 */
 
 .u-fontSize-reset {
-    font-size: var(--base-font-size)px !important;
-    font-size: var(--base-font-size-ratio)rem !important;
+    font-size: var(--font-size)px !important; /* [1] */
+    font-size: var(--font-size-ratio)rem !important; /* [1] */
+    line-height: var(--line-height); /* [2] */
 }
 
+.u-fontSize-xs {
+    font-size: var(--font-size-xs)px !important;
+    font-size: var(--font-size-ratio-xs)rem !important;
+    line-height: var(--line-height-xs); /* [2] */
+}
 .u-fontSize-s {
     font-size: var(--font-size-s)px !important;
-    font-size: var(--font-size-s-ratio)rem !important;
+    font-size: var(--font-size-ratio-s)rem !important;
+    line-height: var(--line-height-s); /* [2] */
 }
 .u-fontSize-m {
     font-size: var(--font-size-m)px !important;
-    font-size: var(--font-size-m-ratio)rem !important;
+    font-size: var(--font-size-ratio-m)rem !important;
+    line-height: var(--line-height-m); /* [2] */
 }
 .u-fontSize-l {
     font-size: var(--font-size-l)px !important;
-    font-size: var(--font-size-l-ratio)rem !important;
+    font-size: var(--font-size-ratio-l)rem !important;
+    line-height: var(--line-height-l); /* [2] */
 }
 .u-fontSize-xl {
     font-size: var(--font-size-xl)px !important;
-    font-size: var(--font-size-xl-ratio)rem !important;
+    font-size: var(--font-size-ratio-xl)rem !important;
+    line-height: var(--line-height-xl); /* [2] */
 }
 
 
-/*      Sizes in %
+/*      Relative Sizes in % (some default common ratios)
 */
 
+.u-fontSize-9of10x {
+    font-size: 90% !important;
+}
+.u-fontSize-11of10x {
+    font-size: 110% !important;
+}
 .u-fontSize-3of2x {
     font-size: 150% !important;
 }
