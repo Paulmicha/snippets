@@ -75,14 +75,6 @@ jQuery.fn.proxify = function(options)
                     properties.toggle_class = "is-active";
                 }
                 
-                //      Handle cursor on targets when pointer events are proxied
-                //      + provide an option to opt it out
-                if (!properties.no_cursor
-                    && (properties.evt_types.match(/click/g)
-                    || properties.evt_types.match(/mouse/g))) {
-                    $target.css('cursor', 'pointer');
-                }
-                
                 //      Keep stuff for later use
                 properties.targets = $target;
                 properties.source = $this;
