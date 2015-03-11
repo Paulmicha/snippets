@@ -11,7 +11,7 @@
 #   
 #   Install :
 #   mkdir ~/custom_bash_scripts
-#   wget https://github.com/Paulmicha/snippets/raw/master/Sys-admin/Drupal/7/phpfpm-fixperms-alt.script.sh --quiet --no-check-certificate --output-document="~/custom_bash_scripts/d7_phpfpm_fixperms_alt.sh"
+#   wget https://github.com/Paulmicha/snippets/raw/master/Sys-admin/Drupal/7/phpfpm-fixperms-alt.script.sh --quiet --no-check-certificate -O ~/custom_bash_scripts/d7_phpfpm_fixperms_alt.sh
 #   chmod +x ~/custom_bash_scripts/d7_phpfpm_fixperms_alt.sh
 #   
 #   Use :
