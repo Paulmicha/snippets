@@ -1,0 +1,11 @@
+
+/**
+ *  @file
+ *  Specific styles
+ */
+
+/*      Fix interaction with Barebones
+*/
+a.Button {
+    border-color: var(--Button-border-color) !important;
+}

@@ -1,0 +1,49 @@
+
+/**
+ *  @file
+ *  Base styles
+ *  (=reset/normalize, raw HTML tags styles only)
+ *  @see https://github.com/paulrobertlloyd/barebones
+ */
+
+/* ============================================================
+    Viewport
+============================================================ */
+@-ms-viewport {
+    width: device-width;
+}
+@viewport {
+    width: device-width;
+}
+
+
+/* ============================================================
+    HTML5 Elements
+============================================================ */
+section, nav, article, aside, hgroup, header, footer, main,
+img, figure, figcaption, details, menu {
+    display: block;
+}
+audio, video, canvas {
+    display: inline-block;
+}
+
+
+/* ============================================================
+    Box sizing
+============================================================ */
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* ============================================================
+    Embedded content
+============================================================ */
+img {
+    border: 0;
+    max-width: 100%;
+    height: auto;
+}
+

@@ -1,0 +1,90 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/robwierzbowski/node-pixrem
+ */
+
+:root {
+    --margin-s: calc(var(--font-size) * var(--line-height) / 3);
+    --margin-ratio-s: calc(var(--line-height) / 3);
+}
+
+.m--s {
+    margin: var(--margin-s)px !important;
+    margin: var(--margin-ratio-s)rem !important;
+}
+
+
+/*      Directions
+*/
+
+.m-t--s {
+    margin-top: var(--margin-s)px !important;
+    margin-top: var(--margin-ratio-s)rem !important;
+}
+.m-r--s {
+    margin-right: var(--margin-s)px !important;
+    margin-right: var(--margin-ratio-s)rem !important;
+}
+.m-b--s {
+    margin-bottom: var(--margin-s)px !important;
+    margin-bottom: var(--margin-ratio-s)rem !important;
+}
+.m-l--s {
+    margin-left: var(--margin-s)px !important;
+    margin-left: var(--margin-ratio-s)rem !important;
+}
+
+
+/*      Combined Directions (2)
+*/
+
+.m-tr--s {
+    margin: var(--margin-s)px var(--margin-s)px 0 0 !important;
+    margin: var(--margin-ratio-s)rem var(--margin-ratio-s)rem 0 0 !important;
+}
+.m-tb--s {
+    margin: var(--margin-s)px 0 !important;
+    margin: var(--margin-ratio-s)rem 0 !important;
+}
+.m-tl--s {
+    margin: var(--margin-s)px 0 0 var(--margin-s)px !important;
+    margin: var(--margin-ratio-s)rem 0 0 var(--margin-ratio-s)rem !important;
+}
+.m-rb--s {
+    margin: 0 var(--margin-s)px var(--margin-s)px 0 !important;
+    margin: 0 var(--margin-ratio-s)rem var(--margin-ratio-s)rem 0 !important;
+}
+.m-rl--s {
+    margin: 0 var(--margin-s)px !important;
+    margin: 0 var(--margin-ratio-s)rem !important;
+}
+.m-bl--s {
+    margin: 0 0 var(--margin-s)px var(--margin-s)px !important;
+    margin: 0 0 var(--margin-ratio-s)rem var(--margin-ratio-s)rem !important;
+}
+
+
+/*      Combined Directions (3)
+*/
+
+.m-trb--s {
+    margin: var(--margin-s)px var(--margin-s)px var(--margin-s)px 0 !important;
+    margin: var(--margin-ratio-s)rem var(--margin-ratio-s)rem var(--margin-ratio-s)rem 0 !important;
+}
+.m-rbl--s {
+    margin: 0 var(--margin-s)px var(--margin-s)px var(--margin-s)px !important;
+    margin: 0 var(--margin-ratio-s)rem var(--margin-ratio-s)rem var(--margin-ratio-s)rem !important;
+}
+.m-tbl--s {
+    margin: var(--margin-s)px 0 var(--margin-s)px var(--margin-s)px !important;
+    margin: var(--margin-ratio-s)rem 0 var(--margin-ratio-s)rem var(--margin-ratio-s)rem !important;
+}
+.m-trl--s {
+    margin: var(--margin-s)px var(--margin-s)px 0 var(--margin-s)px !important;
+    margin: var(--margin-ratio-s)rem var(--margin-ratio-s)rem 0 var(--margin-ratio-s)rem !important;
+}
+
+

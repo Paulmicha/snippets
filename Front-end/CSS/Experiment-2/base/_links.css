@@ -1,0 +1,58 @@
+
+/**
+ *  @file
+ *  Base styles
+ *  (=reset/normalize, raw HTML tags styles only)
+ *  @see https://github.com/paulrobertlloyd/barebones
+ */
+
+:root {
+    --link-color: #de3500;
+    --link-b-width: 1px;
+    --link-b-color: var(--link-color);
+    
+    --link-color--hover: #ff3e01;
+    --link-b-width--hover: var(--link-b-width);
+    --link-b-color--hover: var(--link-color--hover);
+    
+    --link-color--focus: var(--link-color--hover);
+    --link-b-width--focus: var(--link-b-width);
+    --link-b-color--focus: var(--link-color--focus);
+    
+    --link-color--active: var(--link-color--hover);
+    --link-b-width--active: var(--link-b-width);
+    --link-b-color--active: var(--link-color--active);
+    
+    --link-color--visited: #a92900;
+    --link-b-width--visited: var(--link-b-width);
+    --link-b-color--visited: var(--link-color--visited);
+    
+    --link-outline-width: 2px;
+    --link-outline-color: rgba(255, 0, 86, 0.1);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: var(--link-b-width) solid var(--link-b-color);
+    transition: all .2s ease;
+}
+a:visited {
+    color: var(--link-color--visited);
+    border-bottom: var(--link-b-width--visited) solid var(--link-b-color--visited);
+}
+a:focus {
+    color: var(--link-color--focus);
+    outline: var(--link-outline-width) solid var(--link-outline-color);
+    border-bottom: var(--link-b-width--focus) solid var(--link-b-color--focus);
+}
+a:hover {
+    color: var(--link-color--hover);
+    border-bottom: var(--link-b-width--hover) solid var(--link-b-color--hover);
+}
+a:active {
+    color: var(--link-color--active);
+    border-bottom: var(--link-b-width--active) solid var(--link-b-color--active);
+    transition: none;
+}
+

@@ -1,0 +1,27 @@
+
+/**
+ *  @file
+ *  Typography
+ */
+
+:root {
+    
+    /*      var(--font-size) and var(--line-height) are Fundamental Typographic values :
+            they will be used to determine many proportions. They are unitless values on purpose.
+            @todo use https://github.com/robwierzbowski/node-pixrem
+    */
+    --font-size-ratio: 1;
+    --font-size: calc(var(--font-size-ratio) * 16);
+    --line-height: 1.5; /* Note : this is a ratio */
+    
+    /*      With the use of rem or em units, this allows to "propagate"
+            responsive changes in size automatically - for ex. to margins, paddings, etc.
+            @see mandatory custom media queries declaration
+    */
+    --sm-font-size-modifier: 90%;
+    --xl-font-size-modifier: 115%;
+    
+    --font-family: Georgia, Serif;
+    --font-weight: 400;
+}
+

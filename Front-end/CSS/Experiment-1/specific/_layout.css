@@ -1,0 +1,10 @@
+
+/**
+ *  @file
+ *  Specific styles
+ */
+
+#container {
+    /*max-width: 65em;*/ /* 1040px */
+    max-width: 1085px;
+}

@@ -1,0 +1,40 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/robwierzbowski/node-pixrem
+ */
+
+:root {
+    --padding-xl: calc(var(--font-size) * var(--line-height) * 2);
+    --padding-ratio-xl: calc(var(--line-height) * 2);
+}
+
+.p--xl {
+    padding: var(--padding-xl)px !important;
+    padding: var(--padding-ratio-xl)rem !important;
+}
+
+
+/*      Directions
+*/
+
+.p-t--xl {
+    padding-top: var(--padding-xl)px !important;
+    padding-top: var(--padding-ratio-xl)rem !important;
+}
+.p-r--xl {
+    padding-right: var(--padding-xl)px !important;
+    padding-right: var(--padding-ratio-xl)rem !important;
+}
+.p-b--xl {
+    padding-bottom: var(--padding-xl)px !important;
+    padding-bottom: var(--padding-ratio-xl)rem !important;
+}
+.p-l--xl {
+    padding-left: var(--padding-xl)px !important;
+    padding-left: var(--padding-ratio-xl)rem !important;
+}
+
+

@@ -34,7 +34,8 @@ suitcss --compress theme/_assets/css/main.css theme/_assets/css/build.css
 #       Normal
 suitcss theme/_assets/css/main.css theme/_assets/css/build.css
 
-#       Watch
+#       Watch - Warning : does not work for local includes
+#       @see 
 suitcss --watch theme/_assets/css/main.css theme/_assets/css/build.css
 ```
 

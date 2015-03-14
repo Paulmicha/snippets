@@ -1,0 +1,14 @@
+
+/**
+ *  @file
+ *  JS utils styles
+ */
+
+.is-off .js-hide-off {
+    display: none;
+}
+
+.is-on .js-hide-on {
+    display: none;
+}
+

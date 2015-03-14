@@ -1,0 +1,76 @@
+
+/**
+ *  @file
+ *  Specific styles
+ */
+
+
+.Splash {
+    transition: all 0.2s ease;
+}
+
+.Splash.is-on {
+    background: white;
+    background: rgba(255, 255, 255, .9);
+    /*background-image: url() no-repeat 50% 50%;*/
+    box-shadow: 0 0 1em .5em rgba(255, 255, 255, .9);
+}
+
+/*.js body {*/
+.js .overflow-device-width-fix {
+    overflow-x: hidden;
+}
+
+.js .Splash {
+    position: absolute;
+}
+
+.js .Splash.is-on {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+
+.js .Splash.is-off {
+    /*top: 33%;*/
+    top: 32px;
+    top: 2rem;
+    right: -6em;
+    bottom: auto;
+    left: auto;
+}
+
+.js .Splash.is-off .Splash-content {
+    display: none;
+}
+
+
+
+.js .Splash.is-off:hover {
+    right: -2em;
+}
+.js .Splash.is-off:hover .Button {
+    border-radius: 100%;
+    padding: .5em;
+    background: rgba(255, 255, 255, .9);
+}
+
+
+.Splash .icon-user {
+    position: relative;
+    left: -1em;
+}
+
+.js .Splash.is-off:hover .icon-user {
+    left: 0;
+}
+
+.Splash .icon-user::before {
+    font-size: 200%;
+}
+
+
+

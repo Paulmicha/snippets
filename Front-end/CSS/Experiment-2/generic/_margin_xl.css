@@ -1,0 +1,40 @@
+
+/**
+ *  @file
+ *  Generic styles
+ *  
+ *  @todo use https://github.com/robwierzbowski/node-pixrem
+ */
+
+:root {
+    --margin-xl: calc(var(--font-size) * var(--line-height) * 2);
+    --margin-ratio-xl: calc(var(--line-height) * 2);
+}
+
+.m--xl {
+    margin: var(--margin-xl)px !important;
+    margin: var(--margin-ratio-xl)rem !important;
+}
+
+
+/*      Directions
+*/
+
+.m-t--xl {
+    margin-top: var(--margin-xl)px !important;
+    margin-top: var(--margin-ratio-xl)rem !important;
+}
+.m-r--xl {
+    margin-right: var(--margin-xl)px !important;
+    margin-right: var(--margin-ratio-xl)rem !important;
+}
+.m-b--xl {
+    margin-bottom: var(--margin-xl)px !important;
+    margin-bottom: var(--margin-ratio-xl)rem !important;
+}
+.m-l--xl {
+    margin-left: var(--margin-xl)px !important;
+    margin-left: var(--margin-ratio-xl)rem !important;
+}
+
+
