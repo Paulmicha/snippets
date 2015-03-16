@@ -1,0 +1,17 @@
+
+/**
+ *  Table-based Grid object
+ */
+
+.o-tgrid {
+    display: table;
+    width: 100%;
+    }
+    .o-tgrid__item {
+        display: table-cell;
+        vertical-align: top;
+    }
+    .o-tgrid--equal > .o-tgrid__item {
+        width: 1%;
+    }
+

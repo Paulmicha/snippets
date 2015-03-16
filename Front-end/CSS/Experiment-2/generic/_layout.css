@@ -1,0 +1,43 @@
+
+/**
+ *  @file
+ *  Generic styles
+ */
+
+.u-block {
+    display: block;
+}
+.u-inline-block {
+    display: inline-block;
+}
+
+.u-float-l {
+    float: left;
+}
+.u-float-r {
+    float: right;
+}
+.u-float-none {
+    float: none;
+}
+
+.u-clear {
+    clear: both;
+}
+.u-clear-l {
+    clear: left;
+}
+.u-clear-r {
+    clear: right;
+}
+
+.u-valign-t {
+    vertical-align: top;
+}
+.u-valign-m {
+    vertical-align: middle;
+}
+.u-valign-b {
+    vertical-align: bottom;
+}
+

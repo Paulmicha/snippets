@@ -6,13 +6,13 @@
 
 
 /*      Custom media queries
-        @todo use https://github.com/cssrecipes/custom-media-queries
 */
 
 @custom-media --sm-viewport (max-width:640px);
 @custom-media --md-viewport (min-width:640px) and (max-width:1000px);
 @custom-media --lg-viewport (min-width:1000px);
 @custom-media --xl-viewport (min-width:1400px);
+
 
 
 /*      Third-party
@@ -26,6 +26,7 @@
 @import "suitcss-components-arrange";
 @import "suitcss-components-flex-embed";
 */
+
 
 
 /*      Base
@@ -51,14 +52,31 @@
 /*      Generic
 */
 
+/*      • Box-model
+*/
 @import "./generic/_border.css";
 @import "./generic/_margin.css";
 @import "./generic/_padding.css";
 @import "./generic/_padding_xl.css";
 
+/*      • Layout
+*/
+@import "./generic/_layout.css";
+@import "./generic/_layout_table.css";
+@import "./generic/_layout_inline_block.css";
+
+/*      • Interaction
+*/
 @import "./generic/_js_util_states.css";
+
+/*      • Typography
+*/
 @import "./generic/_text.css";
+
+/*      • Misc
+*/
 @import "./generic/_img.css";
+
 
 
 /*      Effects
@@ -74,6 +92,7 @@
 @import "./fx/_box_shadow.css";
 @import "./fx/_anim_heartbeat.css";
 */
+
 
 
 /*      Specific
