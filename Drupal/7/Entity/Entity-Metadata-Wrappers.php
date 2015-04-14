@@ -54,10 +54,10 @@ $wrapper->body->value->value(array('decode' => TRUE));
 //      Iterate with "auto" Chaining
 
 
-//  $term_wrapper may now be accessed as a taxonomy term wrapper.
-//  @todo is getIterator() optional here ?
-foreach ($wrapper->field_taxonomy_terms->getIterator() as $delta => $term_wrapper) {
-  $label = $term_wrapper->label->value();
+foreach ($wrapper->field_taxonomy_terms->getIterator() as $delta => $term_wrapper)
+{
+    //  $term_wrapper may now be accessed as a taxonomy term wrapper.
+    $label = $term_wrapper->label->value();
 }
 
 
@@ -98,16 +98,19 @@ $wrapper->delete();
 //      Error handling
 
 
-try {
-  $node_wrapper = entity_metadata_wrapper('node', $node);
-  $price = $node_wrapper->field_product->field_price->value();
-}
-catch (EntityMetadataWrapperException $exc) {
-  watchdog(
-    'MODULE_NAME',
-    'See '  . __FUNCTION__ . '() <pre>' .  $exc->getTraceAsString() . '</pre>',
-    NULL, WATCHDOG_ERROR
-  );
+try
+{
+    $node_wrapper = entity_metadata_wrapper('node', $node);
+    $price = $node_wrapper->field_product->field_price->value();
+} 
+catch (EntityMetadataWrapperException $exc)
+{
+    watchdog(
+        'MODULE_NAME',  
+        'See '  . __FUNCTION__ . '() <pre>' .  $exc->getTraceAsString() . '</pre>', 
+        NULL,
+        WATCHDOG_ERROR
+    );
 }
 
 
