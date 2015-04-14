@@ -144,6 +144,9 @@ groups
 #       List groups
 groups user_id
 
+#       Read ownership
+stat -c %U:%G /path/to/file/or/folder
+
 #       Set ownership - chown reference
 chown user_id:group_id path/to/file/or/folder [-R]
 
