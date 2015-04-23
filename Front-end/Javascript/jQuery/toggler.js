@@ -3,11 +3,11 @@
  *  Toggler
  *  Show / hide content by clicking on matching elements
  *  
- *  @example with <a>
+ *  @example avec <a>
  *      JS : $('a[data-toggler]').toggler();
  *      HTML : <a class="is-off" href="#target-by-id" aria-haspopup="true" aria-controls="target-by-id" data-toggler>...</a>
  *      <div class="is-off" id="target-by-id">...</div>
- *  @example variant with <button>
+ *  @example variante avec <button>
  *      JS : $('[aria-controls]').toggler();
  *      HTML : <button class="is-off" aria-haspopup="true" aria-controls="target-by-id">...</button>
  *  @example with custom callback (2 arguments : clicked element, and toggle target)
@@ -71,30 +71,25 @@ jQuery.fn.toggler = function(options)
                     $target_clicked = $this_clicked.data('toggle_controls'),
                     $extra_triggers_clicked = $this_clicked.data('extra_triggers');
                 
-                //      Prevent default link behaviour unless allowed in options
-                if (!options || !options.no_prevent_default) {
-                    e.preventDefault();
-                }
-                
                 if ($target.length)
                 {
                     $target_clicked.toggleClass('is-off').toggleClass('is-on');
                     $this_clicked.toggleClass('is-off').toggleClass('is-on');
                     
-                    //      Update other "triggers" pointing to the same target
+                    //      debug
+                    //console.log('$target');
+                    //console.log($target);
+                    
+                    //      @todo extra triggers aria attributes
+                    //      mode rush : for now just classes
                     if ($extra_triggers_clicked && $extra_triggers_clicked.length)
                     {
-                        $extra_triggers_clicked.each(function()
-                        {
-                            var $extra_trigger = $(this);
-                            $extra_trigger.toggleClass('is-off').toggleClass('is-on');
-                            var aria_expanded = $extra_trigger.attr('aria-expanded');
-                            if (aria_expanded)
-                            {
-                                aria_expanded == 'true' ?
-                                    $extra_trigger.attr('aria-expanded', 'false') :
-                                    $extra_trigger.attr('aria-expanded', 'true') ;
-                            }
+                        //      debug
+                        //console.log('$extra_triggers A');
+                        //console.log($extra_triggers);
+                        
+                        $extra_triggers_clicked.each(function() {
+                            $(this).toggleClass('is-off').toggleClass('is-on');
                         });
                     }
                     
@@ -126,7 +121,7 @@ jQuery.fn.toggler = function(options)
                         }
                         catch(e)
                         {
-                            //      debug
+                            //      debug ok 2015/03/31 16:57:23
                             //console.log('Exception in Click on toggle : ');
                             //console.log($this_clicked);
                             //console.log('-> error message :');
@@ -134,7 +129,194 @@ jQuery.fn.toggler = function(options)
                         }
                     }
                 }
+                
+                //      Pas de navigation retour navigateur pour les toggle
+                //      (vu que les ancres de ces liens sont généralement pas faites pour ça)
+                e.preventDefault();
             });
         }
     });
 };
+
+
+//      update Paul 2015/03/17 13:04:25
+//      Ekopolis Agenda Cop21 : initialisations
+$(function()
+{
+    //      Normal
+    //      (ex: filtres exposés col de gauche)
+    $('a.js-toggler').toggler();
+    
+    //      Spécial
+    //      Besoin de calculer les positions des popups (col de droite)
+    $('a.js-popup-cop21').toggler({
+        
+        /**
+         *  Toggler callback
+         *  • Positionne la popup + flèche en fonction de l'élément cliqué
+         *  • Espace bas col droite (pour éviter de couper les popups)
+         *  • Referme les autres popups
+         */
+        callback: function($clicked_element, $toggle_target)
+        {
+            //      Spacer col droite
+            //      -> doit être positionné ou masqué AVANT les calculs de positions de popup, ci-dessous
+            var $spacer = $('#js-popups-cop21-bottom-spacer'),
+                $grid_item = $toggle_target.parent();
+            
+            if ($spacer.length)
+            {
+                //      Toggle & adjust height based on active popup,
+                //      preventing unwanted "piling" of state classes
+                if ($toggle_target.hasClass('is-on'))
+                {
+                    $spacer.height($toggle_target.outerHeight() + 30);
+                    if (!$spacer.hasClass('is-on')) {
+                        $spacer.addClass('is-on');
+                    }
+                    $spacer.removeClass('is-off');
+                }
+                else if ($toggle_target.hasClass('is-off'))
+                {
+                    $spacer.height('auto');
+                    if (!$spacer.hasClass('is-off')) {
+                        $spacer.addClass('is-off');
+                    }
+                    $spacer.removeClass('is-on');
+                }
+                
+                //      Position : move the spacer below current group of 3 items
+                //      @see http://redmine.neuros.fr/issues/5209
+                
+                /**
+                 *  https://api.jquery.com/index/ in jQuery 1.2.x
+                 */
+                var _find_pos = function($obj, $in_elements)
+                {
+                    var index = false;
+                    
+                    //      Workaround : testing positions...
+                    //var pos_ = $grid_item.position(),
+                    
+                    $in_elements.each(function(i)
+                    {
+                        //      These fail:
+                        //      @see http://stackoverflow.com/questions/3176962/jquery-object-equality
+                        //if ($obj === $(this)) {
+                        //if ($.data($obj) === $.data(this)) {
+                        //if ($.data($obj) === $.data($(this))) {
+                        
+                        //      This works:
+                        if ($obj[0] === $(this)[0]) {
+                            index = i;
+                        }
+                    });
+                    
+                    return index;
+                };
+                
+                
+                var $sibling_grid_items = $grid_item.parent().children(),
+                    index = _find_pos($grid_item, $sibling_grid_items),
+                    cols_nb = 3,
+                    index_modulo = (index + 1) % cols_nb,
+                    shift_amount = cols_nb - index_modulo,
+                    $spacer_pos_grid_item = $grid_item;
+                
+                //      debug
+                //console.log('$sibling_grid_items = ');
+                //console.log($sibling_grid_items);
+                //console.log("index = " + index);
+                //console.log("index = " + index);
+                //console.log("index_modulo = " + index_modulo);
+                
+                //      Find after which item we need to insert the spacer
+                if ($sibling_grid_items.length > 1
+                    && (index + 1) != $sibling_grid_items.length
+                    && index_modulo != 0) {
+                    $spacer_pos_grid_item = $sibling_grid_items.eq(index + shift_amount);
+                }
+                
+                //      Move spacer
+                if ($spacer.hasClass('is-on')) {
+                    $spacer_pos_grid_item.after($spacer);
+                }
+                else if ($spacer.parent().hasClass('o-ibgrid')) {
+                    $grid_item.parent().parent().parent().append($spacer);
+                }
+            }
+            
+            
+            
+            //      update Paul 2015/03/31 16:49:57 - quand on clique sur la croix fermer,
+            //      le grid item n'est pas le parent
+            //if ($clicked_element.attr('title') == "Fermer") {
+            //}
+            //var $grid_item = $clicked_element.parent(),
+            //      -> en fait, prenons le toggle target comme référence : ne varie pas, et surtout,
+            //      a aussi comme parent le grid item qu'on veut
+            
+            //      Positionne la popup + la flèche
+            var $fleche = $toggle_target.find('.c-eko-popup__fleche'),
+                pos = $grid_item.position(),
+                grid_item_width = $grid_item.width(),
+                grid_item_outer_height = $grid_item.outerHeight();
+            
+            $toggle_target.css('top', pos.top + grid_item_outer_height);
+            $fleche.css('left', pos.left + (grid_item_width / 2) - ($fleche.width() / 2));
+            
+            
+            //      Referme les autres popups
+            jQuery('a.js-popup-cop21').each(function()
+            {
+                var $this = $(this);
+                if ($this.attr('href') != $clicked_element.attr('href') && $this.hasClass('is-on'))
+                {
+                    //      Refermer la popup qui était ouverte
+                    //      -> reproduire le click "à la main"
+                    //      @todo method in plugin for that
+                    var $target = $this.data('toggle_controls'),
+                        $extra_triggers = $this.data('extra_triggers');
+                    
+                    if ($target.length)
+                    {
+                        $target.toggleClass('is-off').toggleClass('is-on');
+                        $this.toggleClass('is-off').toggleClass('is-on');
+                        
+                        //      @todo extra triggers aria attributes
+                        //      mode rush : for now just classes
+                        if ($extra_triggers && $extra_triggers.length)
+                        {
+                            //      debug
+                            //console.log('$extra_triggers B');
+                            //console.log($extra_triggers);
+                            
+                            $extra_triggers.each(function() {
+                                $(this).toggleClass('is-off').toggleClass('is-on');
+                            });
+                        }
+                        
+                        var aria_hidden = $target.attr('aria-hidden');
+                        if (aria_hidden)
+                        {
+                            aria_hidden == 'true' ?
+                                $target.attr('aria-hidden', 'false') :
+                                $target.attr('aria-hidden', 'true') ;
+                        }
+                        var aria_expanded = $this.attr('aria-expanded');
+                        if (aria_expanded)
+                        {
+                            aria_expanded == 'true' ?
+                                $this.attr('aria-expanded', 'false') :
+                                $this.attr('aria-expanded', 'true') ;
+                        }
+                    }
+                }
+            });
+        }
+    });
+});
+
+
+
+
