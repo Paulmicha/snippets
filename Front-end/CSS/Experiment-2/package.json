@@ -1,0 +1,12 @@
+{
+    "dependencies" :
+    {
+        "gulp": "3.x",
+        "gulp-pixrem": "0.x",
+        "gulp-cssnext": "1.x",
+        
+        "normalize.css": "3.x",
+        "basscss-base-reset": "2.x",
+        "suitcss-components-flex-embed": "2.x"
+    }
+}

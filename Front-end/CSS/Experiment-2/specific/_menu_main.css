@@ -1,0 +1,40 @@
+
+/**
+ *  @file
+ *  Specific styles
+ */
+
+:root {
+    --text-color: var(--grey-bright);
+}
+
+
+/*      Main menu
+*/
+
+[role="navigation"] a.active {
+    color: var(--link-color--hover);
+}
+
+
+a[class^="iconb-"]::before,
+a[class*=" iconb-"]::before {
+    display: inline-block;
+    color: var(--text-color);
+    transform: translateZ(0);
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+
+a.active[class^="iconb-"]::before,
+a[class^="iconb-"]:focus::before,
+a[class^="iconb-"]:active::before,
+a[class^="iconb-"]:hover::before,
+a.active[class*=" iconb-"]::before,
+a[class*=" iconb-"]:focus::before,
+a[class*=" iconb-"]:active::before,
+a[class*=" iconb-"]:hover::before {
+    color: var(--text-color);
+    transform: scale(1.5) rotate(6deg);
+}

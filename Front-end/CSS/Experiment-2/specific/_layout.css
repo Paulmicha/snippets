@@ -1,10 +1,52 @@
 
 /**
- *  @file
  *  Specific styles
+ *  Main layout : mobile-first
  */
 
-#container {
-    /*max-width: 65em;*/ /* 1040px */
-    max-width: 1085px;
+[role="main"] > form,
+.wrap {
+    max-width: 512px;
+    max-width: 32rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: var(--padding-l)px;
+    padding-right: var(--padding-ratio-l)rem;
+    padding-left: var(--padding-l)px;
+    padding-left: var(--padding-ratio-l)rem;
 }
+
+@media (--md-viewport) {
+    [role="main"] > form,
+    .wrap {
+        max-width: 632px;
+        max-width: 39.5rem;
+    }
+}
+
+@media (--lg-viewport) {
+    [role="main"] > form,
+    .wrap {
+        max-width: 960px;
+        max-width: 60rem;
+    }
+}
+
+@media (--xl-viewport) {
+    [role="main"] > form,
+    .wrap {
+        max-width: 1280px;
+        /*max-width: 80rem;*/
+        max-width: 70rem; /* compenser le 115% base font-size */
+    }
+}
+
+
+/*      Content
+*/
+
+.page-node .node.full {
+    margin: var(--margin)px 0;
+    margin: var(--margin-ratio)rem 0;
+}
+

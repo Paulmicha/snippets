@@ -12,7 +12,7 @@
     */
     --font-size-ratio: 1;
     --font-size: calc(var(--font-size-ratio) * 16);
-    --line-height: 1.5; /* Note : this is a ratio */
+    --line-height: 1.4; /* Note : this is a ratio */
     
     /*      With the use of rem or em units, this allows to "propagate"
             responsive changes in size automatically - for ex. to margins, paddings, etc.
@@ -23,12 +23,11 @@
     
     --font-family: Georgia, Serif;
     --font-weight: 400;
+    --font-weight-bold: 700;
     
     
     /*      Presets : XS < S < M < L < XL
     */
-    
-    --font-weight-bold: 700;
     
     --font-size-ratio-xs: .75;
     --font-size-xs: calc(var(--font-size) * var(--font-size-ratio-xs));

@@ -1,0 +1,53 @@
+
+/**
+ *  Inline-block-based Grid object
+ *  @require base/_typography.vars.css
+ *  @require generic/_padding.css
+ *  @todo use https://github.com/robwierzbowski/node-pixrem
+ */
+
+:root {
+    --grid-padding: calc(var(--padding)/2);
+    --grid-padding-ratio: calc(var(--padding-ratio)/2);
+}
+
+
+/*      [1] Remove white space between children
+        [2] Portability
+        [3] Restore font-size from document,
+            @see base/_typography.vars.css
+        [4] Restore text-orientation inside grid item
+            @todo bi-directionnal text support 
+*/
+.o-grid {
+    display: block;
+    font-size: 0; /* [1] */
+}
+.o-grid--gutter {
+    margin-right: -var(--grid-padding)px;
+    margin-right: -var(--grid-padding-ratio)rem;
+    margin-left: -var(--grid-padding)px;
+    margin-left: -var(--grid-padding-ratio)rem;
+}
+.o-grid--centered,
+.o-grid--centered-desc {
+    text-align: center;
+    }
+    .o-grid--centered > .o-grid__item {
+        text-align: left; /* [4] */
+    }
+    .o-grid--gutter > .o-grid__item {
+        box-sizing: border-box; /* [2] */
+        padding: 0 var(--grid-padding)px;
+        padding: 0 var(--grid-padding-ratio)rem;
+    }
+    .o-grid__item {
+        display: inline-block;
+        vertical-align: top;
+        font-size: var(--font-size)px; /* [3] */
+        font-size: var(--font-size-ratio)rem; /* [3] */
+    }
+    .o-grid--middle .o-grid__item {
+        vertical-align: middle;
+    }
+

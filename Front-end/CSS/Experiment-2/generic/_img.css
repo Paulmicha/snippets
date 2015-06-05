@@ -1,8 +1,18 @@
 
 /**
- *  @file
- *  Generic styles
+ *  Generic styles : img
+ *  @todo use https://github.com/robwierzbowski/node-pixrem
  */
+
+:root {
+    --img-placeholder-bg: var(--grey-t);
+    --img-placeholder-color: var(--text-color);
+    --img-placeholder-size-ratio-s: 3;
+    --img-placeholder-size-s: calc(var(--img-placeholder-size-ratio-s) * var(--font-size));
+    --img-placeholder-size-ratio-m: 10;
+    --img-placeholder-size-m: calc(var(--img-placeholder-size-ratio-m) * var(--font-size));
+}
+
 
 .u-rounded,
 .u-rounded--children > *,
@@ -10,5 +20,42 @@
 .u-rounded--child-img > img,
 .u-rounded--descendant-img img {
     border-radius: 100% !important;
+    /*display: inline-block;*/
+}
+
+.img-placeholder {
+    /*
+    font-size: 0;
+    position: relative;
+    padding-bottom: 100%;
+    */
+    background: var(--img-placeholder-bg);
+    color: var(--img-placeholder-color);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/*
+.img-placeholder > *,
+.img-placeholder::before {
+    position: absolute;
+    top: 0;
+    font-size: var(--font-size)px;
+    font-size: var(--font-size-ratio)rem;
+}
+*/
+    
+.img-placeholder--s {
+    width: var(--img-placeholder-size-s)px;
+    width: var(--img-placeholder-size-ratio-s)rem;
+    height: var(--img-placeholder-size-s)px;
+    height: var(--img-placeholder-size-ratio-s)rem;
+}
+
+.img-placeholder--m {
+    width: var(--img-placeholder-size-m)px;
+    width: var(--img-placeholder-size-ratio-m)rem;
+    height: var(--img-placeholder-size-m)px;
+    height: var(--img-placeholder-size-ratio-m)rem;
 }
 

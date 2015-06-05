@@ -5,10 +5,10 @@
  *  @require base/colors.vars.css
  */
 
-/*
 :root {
+    --html-bg-color: var(--grey-darkest);
+    --text-color: var(--grey-bright);
 }
-*/
 
 
 /*      Note the absence of "root" font-size declaration
@@ -18,8 +18,10 @@ html {
     background: var(--html-bg-color);
     font-family: var(--font-family);
     font-weight: var(--font-weight);
+    line-height: var(--line-height);
     color: var(--text-color);
     text-rendering: optimizeLegibility;
+    position: relative;
 }
 @media (--sm-viewport) {
     html {
@@ -32,9 +34,26 @@ html {
     }
 }
 
-/*
+html,
 body {
-    
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
 }
+
+
+/*    Expermiment + body bottom space
 */
+
+body {
+    overflow-x: hidden;
+    padding-bottom: var(--padding-l)px;
+    padding-bottom: var(--padding-ratio-l)rem;
+    /*
+    padding-right: var(--padding-l)px;
+    padding-right: var(--padding-ratio-l)rem;
+    padding-left: var(--padding-l)px;
+    padding-left: var(--padding-ratio-l)rem;
+    */
+}
 

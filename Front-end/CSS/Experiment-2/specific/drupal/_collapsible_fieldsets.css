@@ -1,0 +1,73 @@
+
+/**
+ * @file
+ * Basic styling for common markup.
+ */
+
+/**
+ * HTML elements.
+ *
+fieldset {
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+/**/
+
+/**
+ * Collapsible fieldsets.
+ *
+ * @see collapse.js
+ */
+html.js fieldset.collapsible .fieldset-legend {
+  /*background: url(../../misc/menu-expanded.png) 5px 65% no-repeat;*/ /* LTR */
+  padding-left: 15px; /* LTR */
+}
+
+/*      Custom icon : bottom chevron
+*/
+html.js fieldset.collapsible .fieldset-legend::before {
+    content: "\e612";
+    font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html.js fieldset.collapsed .fieldset-legend {
+  /*background-image: url(../../misc/menu-collapsed.png);*/ /* LTR */
+  /*background-position: 5px 50%;*/ /* LTR */
+}
+
+/*      Custom icon : right chevron
+*/
+html.js fieldset.collapsed .fieldset-legend::before {
+    content: "\e614";
+    font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/*      Link
+*/
+html.js fieldset.collapsible .fieldset-title {
+    border: 0 none;
+    padding-left: .33em;
+}
+
+.fieldset-legend span.summary {
+  color: #999;
+  font-size: 0.9em;
+  margin-left: 0.5em;
+}
+

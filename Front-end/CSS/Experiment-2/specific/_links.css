@@ -4,8 +4,19 @@
  *  Specific styles
  */
 
-/*      Fix interaction with Barebones
-*/
-a.Button {
-    border-color: var(--Button-border-color) !important;
+a.is-active {
+    color: var(--link-color--hover);
+    border-bottom: var(--link-border-width--hover) solid var(--link-border-color--hover);
+}
+
+th > a,
+th > a.active,
+th > a.is-on {
+    color: var(--text-color);
+    border-bottom: var(--link-border-width) solid var(--link-border-color);
+}
+
+th > a:hover {
+    color: var(--link-color--hover);
+    border-bottom: var(--link-border-width--hover) solid var(--link-border-color--hover);
 }

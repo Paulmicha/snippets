@@ -6,20 +6,18 @@
  *  @todo use https://github.com/robwierzbowski/node-pixrem
  */
 
-/*      @see base/typography.vars.css
-:root {
-}
-*/
-
 
 /*      Alignments
 */
 
-.u-align-r {
+.u-right {
     text-align: right !important;
 }
-.u-align-l {
+.u-left {
     text-align: left !important;
+}
+.u-center {
+    text-align: center !important;
 }
 
 
@@ -39,8 +37,17 @@
 .u-uppercase {
     text-transform: uppercase !important;
 }
-.u-center {
-    text-align: center !important;
+.u-break-all {
+    word-break: break-all;
+    hyphens: auto;
+}
+
+
+/*      Misc
+*/
+
+.u-unselecteable {
+    user-select: none;
 }
 
 
@@ -49,33 +56,33 @@
         [2] : no !important for line-height for contextual "overridability"
 */
 
-.u-fontSize-reset {
+.u-fs-reset {
     font-size: var(--font-size)px !important; /* [1] */
     font-size: var(--font-size-ratio)rem !important; /* [1] */
     line-height: var(--line-height); /* [2] */
 }
 
-.u-fontSize-xs {
+.u-fs-xs {
     font-size: var(--font-size-xs)px !important;
     font-size: var(--font-size-ratio-xs)rem !important;
     line-height: var(--line-height-xs); /* [2] */
 }
-.u-fontSize-s {
+.u-fs-s {
     font-size: var(--font-size-s)px !important;
     font-size: var(--font-size-ratio-s)rem !important;
     line-height: var(--line-height-s); /* [2] */
 }
-.u-fontSize-m {
+.u-fs-m {
     font-size: var(--font-size-m)px !important;
     font-size: var(--font-size-ratio-m)rem !important;
     line-height: var(--line-height-m); /* [2] */
 }
-.u-fontSize-l {
+.u-fs-l {
     font-size: var(--font-size-l)px !important;
     font-size: var(--font-size-ratio-l)rem !important;
     line-height: var(--line-height-l); /* [2] */
 }
-.u-fontSize-xl {
+.u-fs-xl {
     font-size: var(--font-size-xl)px !important;
     font-size: var(--font-size-ratio-xl)rem !important;
     line-height: var(--line-height-xl); /* [2] */
@@ -85,19 +92,22 @@
 /*      Relative Sizes in % (list of proportions, may add more)
 */
 
-.u-fontSize-9of10x {
+.u-fs-9of10x {
     font-size: 90% !important;
 }
-.u-fontSize-11of10x {
+.u-fs-11of10x {
     font-size: 110% !important;
 }
-.u-fontSize-3of2x {
+.u-fs-3of2x {
     font-size: 150% !important;
 }
-.u-fontSize-2x {
+.u-fs-2x {
     font-size: 200% !important;
 }
-.u-fontSize-3x {
+.u-fs-3x {
     font-size: 300% !important;
+}
+.u-fs-4x {
+    font-size: 400% !important;
 }
 

@@ -7,25 +7,31 @@
  */
 
 :root {
-    --link-color: #de3500;
-    --link-b-width: 1px;
-    --link-b-color: var(--link-color);
+    /*--link-color: var(--orange-bright);*/
+    --link-color: var(--orange-pale);
+    /*--link-color: var(--pink-pale);*/
+    /*--link-color: var(--yellow);*/
+    /*--link-color: var(--pink-bright);*/
+    /*--link-color: var(--pink);*/
     
-    --link-color--hover: #ff3e01;
-    --link-b-width--hover: var(--link-b-width);
-    --link-b-color--hover: var(--link-color--hover);
+    --link-border-width: 1px;
+    --link-border-color: var(--link-color);
+    
+    --link-color--hover: var(--green-bright);
+    --link-border-width--hover: var(--link-border-width);
+    --link-border-color--hover: var(--link-color--hover);
     
     --link-color--focus: var(--link-color--hover);
-    --link-b-width--focus: var(--link-b-width);
-    --link-b-color--focus: var(--link-color--focus);
+    --link-border-width--focus: var(--link-border-width);
+    --link-border-color--focus: var(--link-color--focus);
     
     --link-color--active: var(--link-color--hover);
-    --link-b-width--active: var(--link-b-width);
-    --link-b-color--active: var(--link-color--active);
+    --link-border-width--active: var(--link-border-width);
+    --link-border-color--active: var(--link-color--active);
     
-    --link-color--visited: #a92900;
-    --link-b-width--visited: var(--link-b-width);
-    --link-b-color--visited: var(--link-color--visited);
+    --link-color--visited: var(--link-color);
+    --link-border-width--visited: var(--link-border-width);
+    --link-border-color--visited: var(--link-color--visited);
     
     --link-outline-width: 2px;
     --link-outline-color: rgba(255, 0, 86, 0.1);
@@ -34,25 +40,31 @@
 a {
     color: var(--link-color);
     text-decoration: none;
-    border-bottom: var(--link-b-width) solid var(--link-b-color);
+    border-bottom: var(--link-border-width) solid var(--link-border-color);
     transition: all .2s ease;
 }
 a:visited {
     color: var(--link-color--visited);
-    border-bottom: var(--link-b-width--visited) solid var(--link-b-color--visited);
+    border-bottom: var(--link-border-width--visited) solid var(--link-border-color--visited);
 }
 a:focus {
     color: var(--link-color--focus);
     outline: var(--link-outline-width) solid var(--link-outline-color);
-    border-bottom: var(--link-b-width--focus) solid var(--link-b-color--focus);
+    border-bottom: var(--link-border-width--focus) solid var(--link-border-color--focus);
 }
+a.active,
+a.is-on,
 a:hover {
     color: var(--link-color--hover);
-    border-bottom: var(--link-b-width--hover) solid var(--link-b-color--hover);
+    border-bottom: var(--link-border-width--hover) solid var(--link-border-color--hover);
 }
 a:active {
     color: var(--link-color--active);
-    border-bottom: var(--link-b-width--active) solid var(--link-b-color--active);
+    border-bottom: var(--link-border-width--active) solid var(--link-border-color--active);
     transition: none;
+}
+
+[role="menuitem"] a {
+    border: 0 none;
 }
 

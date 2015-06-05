@@ -1,0 +1,30 @@
+
+/**
+ *  Table-based Grid object
+ *  Based on suitcss/components-arrange
+ *  @see https://github.com/suitcss/components-arrange
+ */
+
+.o-tgrid {
+    display: table;
+    table-layout: auto;
+    min-width: 100%;
+    }
+    .o-tgrid__item {
+        display: table-cell;
+        vertical-align: top;
+    }
+    .o-tgrid--middle > .o-tgrid__item {
+        vertical-align: middle;
+    }
+    .o-tgrid--bottom > .o-tgrid__item {
+        vertical-align: bottom;
+    }
+
+.o-tgrid--equal {
+    table-layout: fixed;
+    width: 100%;
+    }
+    .o-tgrid--equal > .o-tgrid__item {
+        width: 1%;
+    }

@@ -1,0 +1,29 @@
+
+/**
+ *  CSS - specific styles : Drupal
+ *  From / Autocompletion
+ */
+
+:root {
+    --drupal-autocomplete-color: var(--text-color);
+    --drupal-autocomplete-bg-color: var(--html-bg-color);
+}
+
+#autocomplete,
+#autocomplete * {
+    color: var(--drupal-autocomplete-color);
+    background-color: var(--drupal-autocomplete-bg-color);
+}
+
+
+/**
+ * Autocomplete.
+ *
+ * @see autocomplete.js
+ */
+/* Suggestion list */
+#autocomplete li.selected {
+  background: #0072b9;
+  color: #fff;
+}
+

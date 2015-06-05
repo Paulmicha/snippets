@@ -32,12 +32,96 @@
 }
 
 .u-valign-t {
-    vertical-align: top;
+    vertical-align: top !important;
 }
 .u-valign-m {
-    vertical-align: middle;
+    vertical-align: middle !important;
 }
 .u-valign-b {
-    vertical-align: bottom;
+    vertical-align: bottom !important;
+}
+
+.u-overflow-hidden {
+    overflow: hidden;
+}
+
+
+/*      Vertical centering :
+        inline-block-only children method
+*/
+
+.o-vcenter::before {
+    content: "";
+    height: 100%;
+}
+.o-vcenter > *,
+.o-vcenter::before {
+    display: inline-block;
+    vertical-align: middle !important;
+}
+
+
+/*      Squared container
+*/
+
+.o-squared {
+    padding-bottom: 100%;
+    position: relative;
+}
+.o-squared__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+/*      Accessibility
+*/
+
+.hidden,
+.accessibility {
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+}
+
+
+/*      Clearfix
+*/
+
+.cf {
+    display: block;
+}
+.cf:before,
+.cf:after {
+    content: "";
+    display: table;
+}
+.cf:after {
+    clear: both;
+}
+
+
+
+/*      Typography : measure
+        “Anything from 45 to 75 characters is widely regarded as a satisfactory length of line
+        for a single-column page set in a serifed text face in a text size.
+        The 66-character line (counting both letters and spaces) is widely regarded as ideal.
+        For multiple column work, a better average is 40 to 50 characters.”
+        @see http://webtypography.net/2.1.2
+*/
+
+.u-typo-block-w {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 33em;
 }
 

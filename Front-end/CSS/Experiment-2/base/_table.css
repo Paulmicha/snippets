@@ -1,0 +1,98 @@
+/**
+ *  @file
+ *  Base styles
+ *  (=reset/normalize, raw HTML tags styles only)
+ *  @see https://github.com/paulrobertlloyd/barebones
+ */
+
+:root {
+    --table-border: 0 none;
+    --table-margin: var(--margin) 0;
+    --table-margin-ratio: var(--margin-ratio) 0;
+    --table-width: 100%;
+    
+    --table-caption-color: inherit;
+    
+    --table-hcell-border-b: 0 none;
+    --table-hcell-bg-color: var(--transparent-grey);
+    --table-hcell-color: var(--text-color);
+    --table-hcell-font-weight: var(--font-weight);
+    
+    --table-cell-border-b: 1px solid var(--transparent-white-light);
+    --table-cell-padding: var(--padding)px var(--padding-l)px;
+    --table-cell-padding-ratio: var(--padding-ratio)rem var(--padding-ratio-l)rem;
+}
+
+
+table {
+    border: var(--table-border);
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: var(--table-margin);
+    width: var(--table-width);
+}
+
+caption {
+    caption-side: bottom;
+    color: var(--table-caption-color);
+    font-size: var(--font-size-ratio-s)em;
+    line-height: var(--line-height-s);
+    text-align: left;
+    margin: var(--margin-ratio)em 0;
+}
+
+td,
+th {
+    padding: var(--table-cell-padding);
+    padding: var(--table-cell-padding-ratio);
+    border-bottom: var(--table-cell-border-b);
+    text-align: left;
+}
+
+th {
+    background: var(--table-hcell-bg-color);
+    border-bottom: var(--table-hcell-border-b);
+}
+
+th,
+th a,
+th a:hover {
+    color: var(--table-hcell-color);
+    font-weight: var(--table-hcell-font-weight);
+}
+
+tbody th {
+    vertical-align: top;
+}
+
+
+/*      Experiment
+*/
+
+td[colspan] {
+    text-align: center;
+}
+
+
+/*
+tr.odd {
+    background: #e4e4e4;
+    background: rgba(0, 0, 0, 0.105);
+}
+tr,
+tr.even {
+    background: #efefef;
+    background: rgba(0, 0, 0, 0.063);
+}
+*/
+
+table ul.links {
+    margin: 0;
+    padding: 0;
+}
+
+table ul.links li {
+    padding: 0 1em 0 0;
+}
+
+

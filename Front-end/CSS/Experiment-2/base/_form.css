@@ -1,20 +1,82 @@
 
 /**
- *  @file
- *  Base styles
- *  (=reset/normalize, raw HTML tags styles only)
+ *  Base styles : Form elements
  *  @see https://github.com/paulrobertlloyd/barebones
+ *  @see https://github.com/suitcss/components-button/
+ *  
+ *  @require base/_colors.vars.css
+ *  @require generic/_border.css
+ *  @require generic/_margin.css
+ *  @require generic/_padding.css
  */
 
+:root {
+    /*--input-bg-color: var(--html-bg-color);*/
+    --label-line-height: 1.5;
+    
+    /*      Base styles for buttons, submit, etc : using SuitCSS's Button component
+    */
+    
+    /*--Button-border-color: currentcolor;*/
+    --Button-border-color: var(--transparent-white-light);
+    --Button-border-width: 1px;
+    --Button-color: inherit;
+    --Button-background: transparent;
+    --Button-disabled-opacity: 0.6;
+    --Button-font: inherit;
+    --Button-padding: 0.4em 0.75em;
+    /*--Button-padding: var(--padding);*/
+    
+    /*
+    --Button-color--hover: var(--link-color--hover);
+    --Button-color--hover: var(--blue-bright);
+    --Button-border-color--hover: var(--link-border-color--hover);
+    */
+    
+    --Button-color--hover: var(--blue-brightest);
+    --Button-border-color--hover: var(--link-border-color--hover);
+    
+    
+    /*      Text inputs : textfields, search, email, telephone, textareas
+    */
+    
+    --input-text-border-color: var(--Button-border-color);
+    --input-text-border-width: var(--Button-border-width);
+    --input-text-padding: var(--padding);
+    --input-text-padding-ratio: var(--padding-ratio);
+    /*--input-text-background: var(--Button-background);*/
+    --input-text-background: var(--html-bg-color);
+    
+    
+    /*      Special
+    */
+    
+    --select-bg-color: var(--html-bg-color);
+    
+    
+    /*      Fieldsets
+    */
+    
+    --fieldset-border: var(--border);
+    --fieldset-margin-tb: var(--margin);
+    --fieldset-margin-tb-ratio: var(--margin-ratio);
+    --fieldset-padding: var(--padding);
+    --fieldset-padding-ratio: var(--padding-ratio);
+}
+
+
 fieldset {
-    border: 0;
-    padding: 0;
+    border: var(--fieldset-border);
+    margin: var(--fieldset-margin-tb)px 0;
+    margin: var(--fieldset-margin-tb-ratio)rem 0;
+    padding: var(--fieldset-padding)px;
+    padding: var(--fieldset-padding-ratio)rem;
 }
 legend {
     margin: 0;
 }
 label {
-    line-height: 1.5;
+    line-height: var(--label-line-height);
     cursor: pointer;
 }
 button,
@@ -23,21 +85,34 @@ select,
 textarea {
     color: inherit;
     font-family: inherit;
-    font-size: 100%;
+    font: inherit;
     margin: 0;
     outline: 0;
     max-width: 100%;
+    /*background-color: inherit;*/
 }
 select {
     /*
     -webkit-appearance: button;
     appearance: normal;
     */
-    padding: .5em;
-    width: 100%;
+    border-color: var(--Button-border-color);
+    border-style: solid;
+    border-width: var(--Button-border-width);
+    /*padding: var(--Button-padding);*/
+    padding: var(--input-text-padding)px;
+    padding: var(--input-text-padding-ratio)rem;
+    /*width: 100%;*/
     cursor: pointer;
 }
+select,
+option {
+    background: var(--select-bg-color);
+}
 
+
+
+/*
 button,
 input[type="button"],
 input[type="submit"] {
@@ -51,6 +126,103 @@ input[type="submit"] {
         border: 0;
         padding: 0;
     }
+*/
+
+
+/**
+ * 1. Corrects inability to style clickable `input` types in iOS.
+ * 2. Normalize `box-sizing` across all elements that this component could be
+ *    applied to.
+ * 3. Inherit text color from ancestor.
+ * 4. Inherit font styles from ancestor.
+ * 5. Normalize `line-height`. For `input`, it can't be changed from `normal` in Firefox 4+.
+ * 6. Prevent button text from being selectable.
+ * 7. Make sure `input` will wrap text across multiple lines.
+ */
+
+.Button,
+button,
+input[type="button"],
+input[type="submit"] {
+    -webkit-appearance: none; /* 1 */
+    background: var(--Button-background);
+    border-color: var(--Button-border-color);
+    border-style: solid;
+    border-width: var(--Button-border-width);
+    box-sizing: border-box; /* 2 */
+    color: var(--Button-color); /* 3 */
+    cursor: pointer;
+    display: inline-block;
+    font: var(--Button-font); /* 4 */
+    line-height: normal; /* 5 */
+    margin: 0;
+    padding: var(--Button-padding);
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none; /* 6 */
+    white-space: normal; /* 7 */
+    transition: all .2s ease;
+}
+
+/**
+ * Remove excess padding and border in Firefox 4+
+ */
+
+.Button::-moz-focus-inner,
+button::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * Work around a Firefox/IE bug where the transparent `button` background
+ * results in a loss of the default `button` focus styles.
+ */
+
+.Button:focus,
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus {
+    outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+}
+
+/**
+ * UI states
+ */
+
+.Button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.Button:focus,
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus {
+    text-decoration: none;
+    color: var(--Button-color--hover);
+    border-color: var(--Button-border-color--hover);
+}
+
+.Button:disabled,
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+button.is-disabled,
+input[type="button"].is-disabled,
+input[type="submit"].is-disabled {
+    cursor: default;
+    opacity: var(--Button-disabled-opacity);
+}
+
+
+
+
+
+
 input[type="radio"],
 input[type="checkbox"] {
     margin-right: 0.25em;
@@ -66,13 +238,74 @@ input[type="search"]::-webkit-search-decoration {
     cursor:  default;
 }
 
+
+
+/*      Text inputs
+*/
+
 textarea,
 input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="phone"],
 input[type="search"] {
-    border: 1px solid #93033D;
+    border-color: var(--input-text-border-color);
+    border-style: solid;
+    border-width: var(--input-text-border-width);
+    padding: var(--input-text-padding)px;
+    padding: var(--input-text-padding-ratio)rem;
+    background: var(--input-text-background);
+    
+    /*    Experimental test
+    */
+    min-width: 15em;
 }
 
-/* Placeholder */
+
+
+/*      FX à la Bootstrap 2
+*/
+
+.Button,
+button,
+input[type="button"],
+input[type="submit"],
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="phone"],
+input[type="search"] {
+    transition: border linear .2s, box-shadow linear .2s;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.Button:focus,
+.Button:hover,
+button:focus,
+button:hover,
+input[type="button"]:focus,
+input[type="button"]:hover,
+input[type="submit"]:focus,
+input[type="submit"]:hover,
+select:focus,
+select:hover,
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="phone"]:focus,
+input[type="search"]:focus {
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+      border-color: rgba(82, 168, 236, 0.8);
+}
+
+
+
+/*      Placeholder
+*/
+
 ::-webkit-input-placeholder {
     color: #999;
     }

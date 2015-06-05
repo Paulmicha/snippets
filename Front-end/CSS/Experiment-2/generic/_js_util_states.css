@@ -4,11 +4,22 @@
  *  JS utils styles
  */
 
-.is-off .js-hide-off {
-    display: none;
+.is-off > .js-hide-off,
+.is-off .js-hide-off--deep {
+    display: none !important;
 }
 
-.is-on .js-hide-on {
+.is-on > .js-hide-on,
+.is-on .js-hide-on--deep {
+    display: none !important;
+}
+
+
+
+/*      @todo remove this after non-breaking check
+*/
+
+html.js [aria-hidden="true"] {
     display: none;
 }
 
