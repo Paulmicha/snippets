@@ -209,7 +209,7 @@ chmod +x /srv/foobar.com/.git/hooks/post-receive
 
 
 #   On local machine :
-#   Add new bare repo as an additional remote.
+#   Add distant server repo as an additional remote.
 git remote add staging ssh://www-paul@12.34.56.78/srv/foobar.com/.git
 
 #   Test ok 2015/07/19 10:33:00
