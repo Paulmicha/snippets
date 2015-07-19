@@ -11,6 +11,7 @@
 #   
 
 #   Delete all branches that are already merged into the current branch
+#   Warning : also deletes local-only branches
 git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
 
 #   Delete all branches that are already merged into, for example, branch 'ANY-BRANCH'
