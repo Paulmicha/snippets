@@ -16,9 +16,10 @@
 #   
 #   Use :
 #   ~/custom_bash_scripts/d7_phpfpm_fixperms.sh auser www-data /path/to/project-dir
-#   ~/custom_bash_scripts/d7_phpfpm_fixperms.sh auser www-data /path/to/project-dir 640 750 660 770
+#   ~/custom_bash_scripts/d7_phpfpm_fixperms.sh auser www-data /path/to/project-dir 0640 0750 0660 1771
 #   
 #   Sources :
+#   http://permissions-calculator.org/
 #   https://drupal.org/node/244924
 #   
 
@@ -44,31 +45,31 @@ if [ -z "${3}" ]; then
 fi
 
 #       Param 4 : Non-writeable Files chmod
-#       default : 750
+#       default : 0750
 P_NWFI=${4}
 if [ -z "${4}" ]; then
-    P_NWFI=750
+    P_NWFI=0750
 fi
 
 #       Param 5 : Non-writeable Folders chmod
-#       default : 750
+#       default : 0750
 P_NWFO=${5}
 if [ -z "${5}" ]; then
-    P_NWFO=750
+    P_NWFO=0750
 fi
 
 #       Param 6 : Writeable Files chmod
-#       default : 660
+#       default : 0660
 P_WFI=${6}
 if [ -z "${6}" ]; then
-    P_WFI=660
+    P_WFI=0660
 fi
 
 #       Param 7 : Writeable Folders chmod
-#       default : 770
+#       default : 1771
 P_WFO=${7}
 if [ -z "${7}" ]; then
-    P_WFO=770
+    P_WFO=1771
 fi
 
 
