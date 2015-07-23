@@ -5,10 +5,13 @@
 #   Unix Permissions Basics & snippets
 #   (Command-line / Shell / Bash)
 #   
-#   Should apply to most modern Linux distros
-#   Tested on Debian (5, 6, 7) & Ubuntu (12, 14)
+#   Applies to modern Linux distros.
 #   
 #   Sources :
+#   http://permissions-calculator.org/
+#   http://ss64.com/bash/syntax-permissions.html
+#   http://www.techrepublic.com/blog/it-security/understand-the-setuid-and-setgid-permissions-to-improve-security/
+#   http://superuser.com/questions/381416/forcing-group-and-permissions-for-created-file-inside-folder
 #   http://www.tldp.org/LDP/abs/html/invoking.html
 #   http://www.yolinux.com/TUTORIALS/LinuxTutorialManagingGroups.html
 #   https://www.digitalocean.com/community/tutorials/linux-permissions-basics-and-how-to-use-umask-on-a-vps
@@ -71,14 +74,31 @@ find . -type d -exec chmod 750 {} +
 #       1. Each file is owned by exactly one user and one group.
 #       2. Users may belong to several groups, and are automatically assigned a User Private Group (UPG),
 #           which is a unique group of the same name as the user.
-#       3. Configuring services/programs to operate AS a distinct user allows to control their permissions.
+#       3. Configuring services/programs to operate AS a distinct user allows to control their permissions,
+#           although SetUID may alter this behavior, see 7.
 #       4. Default ownership and permissions are "passively" set upon creation (see below).
 #       5. Permission to read a directory also requires execution permission.
 #       6. Ownership and permissions cannot be changed on files or folders not owned by the current user,
-#       except for the admin user "root".
+#           except for the admin user "root".
+#
+#       Advanced behaviors :
+#       7. SetUID and SetGID are special permission bits allowing any user to execute a file or script with
+#           the permissions of its owner or group. Thus, enabling those can easily create security breaches.
+#           When used on directories, SetUID is ignored, but SetGID make all newly created files and subdirs
+#           in these folders inherit the parent directory's owner and/or group, instead of the current user's.
+#           Group must have execute rights for setgid to work.
+#           User must have execute rights for setuid to work.
+#           In cases where it has no effect it is represented with an upper-case "S".
+#       8. The sticky bit is a user ownership access right flag that Linux ignores on files, but on a directory,
+#           files in that directory may only be removed or renamed by root or the directory owner or the file owner.
+#           Typically this is set on the /tmp directory to prevent ordinary users from deleting or moving other users' files.
+#           All public directories should be configured with sticky bit.
+#           Other (everyone) must have execute rights for sticky bit to work.
+#           In cases where it has no effect it is represented with an upper-case "T".
 
 #       Notations :
 #       Description = Abreviation = Octal Code
+None                                = 0
 Read                        = r     = 4
 Write                       = w     = 2
 Execute                     = x     = 1
@@ -87,6 +107,18 @@ Execute                     = x     = 1
 Read and Execute            = rx    = 5
 Read and Write              = rw    = 6
 Read, Write and Execute     = rwx   = 7
+
+#       Special bits : sticky, setuid, setgid :
+None                                = 0
+Sticky                      = t     = 1
+SetUID                      = s     = 2
+SetGID                      = s     = 4
+
+#       Special bits combinations (= additions) :
+Sticky and SetUID           = t     = 3
+Sticky and SetGID           = t     = 5
+SetUID and SetGID           = t     = 6
+Sticky, SetUID and SetGID   = t     = 7
 
 
 
