@@ -139,6 +139,16 @@ INSTANCE="staging.foobar.com"
 BRANCH_TO_DEPLOY="develop"
 DEPLOY_DIR="/var/www/$INSTANCE/docroot"
 
+#   Manual lock :
+#   prevent potentail concurrent deployments.
+LOCK="$HOME/.deploying-$INSTANCE.lock"
+if [ -f $LOCK ]; then
+    echo "Error : existing lock found."
+    echo "A previous deployment may still be in progress."
+    exit 1
+fi
+touch $LOCK
+
 #   Get post-receive arguments.
 #   @param oldrev : previous commit SHA1 hash
 #   @param newrev : last commit SHA1 hash
@@ -173,11 +183,11 @@ do
         fi
 
         #   Logging.
-        echo "DB Backup - Execute : drush sql-dump --gzip --result-file=$DUMP_FILE --structure-tables-list='cache,cache_block,cache_filter,cache_form,cache_menu,cache_page,cache_update,history,watchdog'" >> $LOG_FILE
+        echo "DB Backup - Execute : drush sql-dump --gzip --root=$DEPLOY_DIR --result-file=$DUMP_FILE --structure-tables-list='cache,cache_block,cache_filter,cache_form,cache_menu,cache_page,history,watchdog'" >> $LOG_FILE
 
-        #   Drupal DB dump.
-        drush sql-dump --gzip --root=$DEPLOY_DIR --result-file=$DUMP_FILE --structure-tables-list="cache,cache_block,cache_filter,cache_form,cache_menu,cache_page,cache_update,history,watchdog" &>> $LOG_FILE
-        cp -f $DUMP_FILE $DUMP_FILE_LAST
+        #   Optional : Drupal DB dump.
+        drush sql-dump --gzip --root=$DEPLOY_DIR --result-file=$DUMP_FILE --structure-tables-list="cache,cache_block,cache_filter,cache_form,cache_menu,cache_page,history,watchdog" &>> $LOG_FILE
+        cp -f "$DUMP_FILE.gz" $DUMP_FILE_LAST
         
         #   Logging.
         echo "Execute : git checkout -f $BRANCH_TO_DEPLOY" >> $LOG_FILE
@@ -218,10 +228,14 @@ do
 
         #   Logging.
         DATE_TIME=$(date +"%F %H:%M:%S")
-        echo "\n${DATE_TIME} : Finished Deploy" >> $LOG_FILE
+        echo -e "\n${DATE_TIME} : Finished Deploy" >> $LOG_FILE
         cp -f $LOG_FILE $LOG_FILE_LAST
     fi
 done
+
+#   Release manual lock.
+rm $LOCK
+
 EOF
 
 #   Needs execution permission
