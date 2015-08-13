@@ -11,24 +11,24 @@
 #   and neither merge nor push operations will be executed.
 #   
 #   Install (as root/sudo) :
-#   $ wget https://github.com/Paulmicha/snippets/raw/master/Sys-admin/Drupal/7/fixperms.script.sh --quiet --no-check-certificate -O /usr/local/bin/gmp
+#   $ wget https://github.com/Paulmicha/snippets/raw/master/Git/Merge_push.script.sh --quiet -O /usr/local/bin/gmp
 #   $ chmod +x /usr/local/bin/gmp
 #   
 #   Use (from working repo dir) :
-#   Ex.1 : will prompt for BRANCH_TO_MERGE and BRANCH, then push to default remote 'origin'.
+#   Ex.1 : will prompt for $BRANCH_TO_MERGE and $BRANCH then push $BRANCH to default remote 'origin'.
 #   $ gmp
 #   
-#   Ex.2 : will merge 'features/123' in 'develop', then push to default remote 'origin'.
+#   Ex.2 : will merge 'features/123' in 'develop', then push 'develop' to default remote 'origin'.
 #   $ gmp features/123 develop
 #   
-#   Ex.3 : will pull from 'origin' before merging 'features/123' in 'develop', then push to default remote 'origin'.
+#   Ex.3 : will pull 'develop' from 'origin' before merging 'features/123' in 'develop', then push 'develop' to default remote 'origin'.
 #   $ gmp features/123 develop origin
 #   
-#   Ex.3 : will pull from 'origin' before merging 'features/123' in 'develop', then push to remote 'myserv/staging'.
+#   Ex.4 : will pull 'develop' from 'origin' before merging 'features/123' in 'develop', then push 'develop' to remote 'myserv/staging'.
 #   $ gmp features/123 develop origin myserv/staging
 #   
 #   Sources :
-#   get the names of the files that are conflicted : http://stackoverflow.com/a/11014518/2592338
+#   Get conflicted files = http://stackoverflow.com/a/11014518/2592338
 #   
 
 #   Arg 1 : branch to merge
@@ -38,7 +38,7 @@ if [[ -z $1 ]]; then
     read BRANCH_TO_MERGE
 fi
 
-#   Arg 2 : in which BRANCH to merge
+#   Arg 2 : in which branch to merge
 BRANCH=$2
 if [[ -z $2 ]]; then
     echo -n "Enter in which BRANCH to merge ${BRANCH_TO_MERGE} : "
@@ -81,5 +81,5 @@ if [[ -z $CONFLICTS ]]; then
 else
     echo "Error : the following files are conflicted - merge aborted."
     echo $CONFLICTS
-    exit 1;
+    exit 1
 fi
