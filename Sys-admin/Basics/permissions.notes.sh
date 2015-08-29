@@ -137,8 +137,8 @@ ls -lah
 #       Meaning :
 #           Default owner : current user
 #           Default group : current UPG
-#           Default files perms : 664
-#           Default folders perms : 775
+#           Default files perms : 0664
+#           Default folders perms : 0775
 
 #       Worth noting :
 #       You can add the www-data user (the usual web server - Apache or Nginx workers' - process owner) to any group,

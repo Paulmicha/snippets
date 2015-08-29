@@ -31,6 +31,20 @@ touch path/to/filename.ext
 #       Create file with content
 echo "File content" > path/to/filename.ext
 
+#       Create file with long content.
+cat > path/to/filename.ext <<'EOF'
+Any character here will be written to path/to/filename.ext
+No need to escape any quotes like ' or ".
+$VAR won't be interpreted, because 'EOF' above is quoted.
+EOF
+
+#       Create file with long content - with variables support.
+cat > path/to/filename.ext <<EOF
+Any character here will be written to path/to/filename.ext
+No need to escape any quotes like ' or ".
+$VAR will be interpreted, because EOF above is NOT quoted.
+EOF
+
 #       List files and folders with ownership/group/permissions info
 ls -lah
 #       Date ISO :

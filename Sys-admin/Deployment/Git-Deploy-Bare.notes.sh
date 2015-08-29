@@ -172,7 +172,7 @@ do
 
         #   Logging.
         echo -e "${DATE_TIME} : Received Push Request" >> $LOG_FILE
-        echo "Old SHA: ${oldrev}\nNew SHA: ${newrev}\nBranch Name: ${refname}\n" >> $LOG_FILE
+        echo -e "Old SHA: ${oldrev}\nNew SHA: ${newrev}\nBranch Name: ${refname}\n" >> $LOG_FILE
         
         #   Optional : DB dump backup.
         DUMP_DIR="$HOME/dump/$INSTANCE/$(date +%Y)/$(date +%m)/$(date +%d)"

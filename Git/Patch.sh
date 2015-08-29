@@ -9,6 +9,7 @@
 #   Create patch from commit :
 #       http://stackoverflow.com/questions/6658313/generate-a-git-patch-for-a-specific-commit
 #       http://stackoverflow.com/questions/9396240/how-do-i-simply-create-a-patch-from-my-latest-git-commit
+#   Apply diff file = http://stackoverflow.com/questions/12320863/how-do-you-take-a-git-diff-file-and-apply-it-to-a-local-branch-that-is-a-copy-o
 #   
 
 #------------------------------------------------------------------------------
@@ -34,3 +35,6 @@ git diff > patchfile.patch
 #   Apply patch
 
 patch -p1 < patchfile.patch
+
+#   For diff files (warning : no author info).
+git apply file.diff
