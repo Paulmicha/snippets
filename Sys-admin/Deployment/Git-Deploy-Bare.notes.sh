@@ -164,7 +164,7 @@ do
         #   as there is currently no check in the example below.
         DATE_TIME=$(date +"%F %H:%M:%S")
         LOG_DIR="$HOME/log/$INSTANCE/$(date +%Y)/$(date +%m)/$(date +%d)"
-        LOG_FILE="${LOG_DIR}/$(date +%H)-$(date +%M)-$(date +%M)-${newrev:0:8}.log"
+        LOG_FILE="${LOG_DIR}/$(date +%H)-$(date +%M)-$(date +%S)-${newrev:0:8}.log"
         LOG_FILE_LAST="$HOME/log/$INSTANCE/last_post_receive.log"
         if [ ! -d $LOG_DIR ]; then
             mkdir -p $LOG_DIR
@@ -176,7 +176,7 @@ do
         
         #   Optional : DB dump backup.
         DUMP_DIR="$HOME/dump/$INSTANCE/$(date +%Y)/$(date +%m)/$(date +%d)"
-        DUMP_FILE="${DUMP_DIR}/$(date +%H)-$(date +%M)-$(date +%M)-${newrev:0:8}.sql"
+        DUMP_FILE="${DUMP_DIR}/$(date +%H)-$(date +%M)-$(date +%S)-${newrev:0:8}.sql"
         DUMP_FILE_LAST="$HOME/dump/$INSTANCE/last.sql.gz"
         if [ ! -d $DUMP_DIR ]; then
             mkdir -p $DUMP_DIR
