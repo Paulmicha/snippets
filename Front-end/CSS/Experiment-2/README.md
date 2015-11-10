@@ -48,7 +48,7 @@ path/to/project/
 Each file contains a category from [Josh Duck’s HTML Periodic Table](http://smm.zoomquiet.io/data/20110511083224/index.html) ([Screenshot](http://bradfrost.com/wp-content/uploads/2012/11/Screen-Shot-2012-11-13-at-5.15.05-PM.png)).  
 Exception : headings are in their own separate file, as their typographic nature could be considered beetween text-level semantics and sectionning (hierarchy).  
 Additions :  
-- @necolas's [Normalize](https://github.com/necolas/normalize.css/)
+- @necolas's [Normalize](https://github.com/necolas/normalize.css/) or @jonathantneal's [Sanitize.css](https://github.com/10up/sanitize.css)
 - @mrmrs_'s Bascss [base-reset](https://github.com/basscss/base-reset)
 - @mrmrs_'s [tachyons-box-sizing](https://github.com/mrmrs/tachyons-box-sizing)
 - Bits and pieces to adapt from @paulrobertlloyd's [Barebones](https://github.com/paulrobertlloyd/barebones)
@@ -77,6 +77,7 @@ Examples :
 @bradfrost's terminology : should mostly relate to **Organisms**, **Templates** and **Pages**, but could also include lower-level styles like **Molecules**.
 
 ### 4. `critical.css`
+Experimental / to discuss :  
 This file is the result of a separate compilation, taking any CSS file ending with `.critical.css` (double extension), and optionally (TODO : compilation options) folders like `base/` or `generic/` (as the main layout and typography are usually abstracted - like grids, widths, box-model measures or scales).  
 Alternative tool to generate this file : @filamentgroup's [criticalCSS](https://github.com/filamentgroup/criticalCSS)
 More info :
@@ -92,13 +93,14 @@ More info :
     · `b-` : immutable box-model utilities : borders  
     · `m-` : immutable box-model utilities : margins  
     · `p-` : immutable box-model utilities : paddings  
-• Double extension `.critical.css` for separate inline "critical" CSS compilation  
+• (to discuss) Double extension `.critical.css` for separate inline "critical" CSS compilation  
 • Formatting / coding style :  
     · Use [BEM-like Naming](http://cssguidelin.es/#bem-like-naming)  
     · Tolerate [SUIT CSS naming convention](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)  
     · [Meaningful Whitespace](http://cssguidelin.es/#meaningful-whitespace)  
 • Components :  
-    · Additional namespace by vendor for portability (e.g. `fx-paulmicha-foobar`) ?  
+    · (to discuss) Additional namespace by vendor for portability (e.g. `fx-paulmicha-foobar`) ?  
+    · And/or implement dynamic prefixes à la InuitCSS ?  
 
 
 ## Guidelines
