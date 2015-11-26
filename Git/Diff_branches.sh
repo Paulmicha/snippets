@@ -12,6 +12,8 @@
 #   Compare (or diff) branch_1 and branch_2.
 #   Shows what is in branch_2 that is not in branch_1.
 git diff branch_1..branch_2
+git diff develop..master
 
 #   XOR diff : show what is either in branch_1 or branch_2 but not both.
 git diff branch_1...branch_2
+git diff develop...master

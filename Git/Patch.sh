@@ -29,6 +29,7 @@ git format-patch dffbd117
 #   Create Patch of uncommitted changes
 
 git diff > patchfile.patch
+git diff path/to/file > patchfile.patch
 
 
 #------------------------------------------------------------------------------
