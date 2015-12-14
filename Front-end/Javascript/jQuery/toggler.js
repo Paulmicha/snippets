@@ -131,8 +131,14 @@ jQuery.fn.toggler = function(options)
                     {
                         $this.data('triggers').each(function()
                         {
-                            var $this_single_on = $(this);
-                            if ($this_single_on.attr('href') != $clicked_element.attr('href') && $this_single_on.hasClass('is-on'))
+                            
+                            var $this_single_on = $(this),
+                                this_single_on_href = $this_single_on.attr('href'),
+                                this_single_on_target_selector = this_single_on_href ? this_single_on_href : '#' + $this_single_on.attr('aria-controls'),
+                                clicked_element_href = $clicked_element.attr('href'),
+                                clicked_element_target_selector = clicked_element_href ? clicked_element_href : '#' + $clicked_element.attr('aria-controls');
+
+                            if (this_single_on_target_selector != clicked_element_target_selector && $this_single_on.hasClass('is-on'))
                             {
                                 //      @todo method in plugin for that
                                 var $target = $this_single_on.data('toggle_controls'),
