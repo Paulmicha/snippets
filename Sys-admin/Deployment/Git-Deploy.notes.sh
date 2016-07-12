@@ -31,12 +31,13 @@
 #   Debian 8 "Jessie" (local)
 #   Ubuntu 14.04 LTS "Trusty" (remote)
 #   
-#   @timestamp 2015/07/18 22:52:15
+#   @timestamp 2015/07/22 20:14:41
 #   
 #   Sources :
 #   http://stackoverflow.com/q/12265729
 #   http://stackoverflow.com/a/28262104
 #   http://stackoverflow.com/questions/6635018/reuse-git-work-tree-in-post-receive-hook-to-rm-a-few-files
+#   http://stackoverflow.com/a/13057643/2592338
 #   http://www.sitepoint.com/one-click-app-deployment-server-side-git-hooks/
 #   https://help.github.com/articles/generating-ssh-keys/
 #   http://krisjordan.com/essays/setting-up-push-to-deploy-with-git
@@ -147,55 +148,66 @@ echo -e '#!/bin/bash
 #   @param oldrev : previous commit SHA1 hash
 #   @param newrev : latest commit SHA1 hash
 #   @param refname : branch information (ex: "refs/heads/master")
-read oldrev newrev refname
 
-#   Log
-DATE_TIME=$(date +"%F %H:%M:%S")
-LOG_DIR="$HOME/log/$(date +%Y)/$(date +%m)/$(date +%d)"
-LOG_FILE="${LOG_DIR}/$(date +%H)-$(date +%M)-$(date +%M)-${newrev:0:8}.log"
-if [ ! -d $LOG_DIR ] ; then
-    mkdir -p $LOG_DIR
-fi
-echo -e "${DATE_TIME} : Received Push Request" >> $LOG_FILE
-echo "Old SHA: ${oldrev}\nNew SHA: ${newrev}\nBranch Name: ${refname}\n" >> $LOG_FILE
+#   Only execute deployment when pushing on "staging" branch.
+while read oldrev newrev refname
+do
+    branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+    if [ "$branch"=="staging" ]; then
+        
+        #   Log
+        DATE_TIME=$(date +"%F %H:%M:%S")
+        LOG_DIR="$HOME/log/$(date +%Y)/$(date +%m)/$(date +%d)"
+        LOG_FILE="${LOG_DIR}/$(date +%H)-$(date +%M)-$(date +%M)-${newrev:0:8}.log"
+        LOG_LATEST_COPY="$HOME/log/latest_post_receive.log"
+        if [ ! -d $LOG_DIR ]; then
+            mkdir -p $LOG_DIR
+        fi
+        echo -e "${DATE_TIME} : Received Push Request" >> $LOG_FILE
+        echo "Old SHA: ${oldrev}\nNew SHA: ${newrev}\nBranch Name: ${refname}\n" >> $LOG_FILE
 
-#   For git clean to not remove actual ".git" folder contents
-#   See http://stackoverflow.com/a/6636509/2592338
-export GIT_WORK_TREE=/srv/foobar.com
-export GIT_DIR=/srv/foobar.com/.git
-cd $GIT_WORK_TREE
+        #   For git clean to not remove actual ".git" folder contents
+        #   See http://stackoverflow.com/a/6636509/2592338
+        export GIT_WORK_TREE=/srv/foobar.com
+        export GIT_DIR=/srv/foobar.com/.git
+        cd $GIT_WORK_TREE
 
-#   Deploy "master" branch.
-#   Note : this instance is not meant to be modified by any other means,
-#   so if I understand correctly, the usual concerns are not affecting this case.
-#   See http://stackoverflow.com/q/12265729 and http://stackoverflow.com/a/28262104
-echo "Execute : git checkout -f master" >> $LOG_FILE
-git checkout -f master &>> $LOG_FILE
-echo "Execute : git reset --hard" >> $LOG_FILE
-git reset --hard &>> $LOG_FILE
+        #   Deploy "master" branch.
+        #   Note : this instance is not meant to be modified by any other means,
+        #   so if I understand correctly, the usual concerns are not affecting this case.
+        #   See http://stackoverflow.com/q/12265729 and http://stackoverflow.com/a/28262104
+        echo "Execute : git checkout -f master" >> $LOG_FILE
+        git checkout -f master &>> $LOG_FILE
+        echo "Execute : git reset --hard" >> $LOG_FILE
+        git reset --hard &>> $LOG_FILE
 
-#   Remove untracked files and dirs.
-#   (but keep what is gitignored)
-echo "Execute : git clean -df" >> $LOG_FILE
-git clean -df &>> $LOG_FILE
+        #   Remove untracked files and dirs.
+        #   (but keep what is gitignored)
+        echo "Execute : git clean -df" >> $LOG_FILE
+        git clean -df &>> $LOG_FILE
 
-#   In case git added new files or dirs, we may have to reset their permissions.
-#   (owner should already be www-paul, so chmod should be allowed)
-#   Note : "chown www-paul:www-data /srv/foobar.com -R" is not possible here,
-#   so in current example, we might have to add "www-data" to group "www-paul".
-find /srv/foobar.com/.git -type f -exec chmod 600 {} +
-find /srv/foobar.com/.git -type d -exec chmod 700 {} +
-find /srv/foobar.com -type f -exec chmod 640 {} +
-find /srv/foobar.com -type d -exec chmod 750 {} +
-#find /srv/foobar.com -type f -wholename "*path/to/writeable/sub/dir*" -exec chmod 660 {} +
-#find /srv/foobar.com -type d -wholename "*path/to/writeable/sub/dir*" -exec chmod 770 {} +
+        #   In case git added new files or dirs, we may have to reset their permissions.
+        #   (owner should already be www-paul, so chmod should be allowed)
+        #   Note : "chown www-paul:www-data /srv/foobar.com -R" is not possible here,
+        #   so in current example, we might have to add "www-data" to group "www-paul".
+        find /srv/foobar.com/.git -type f -exec chmod 600 {} +
+        find /srv/foobar.com/.git -type d -exec chmod 700 {} +
+        find /srv/foobar.com -type f -exec chmod 640 {} +
+        find /srv/foobar.com -type d -exec chmod 750 {} +
+        #find /srv/foobar.com -type f -wholename "*path/to/writeable/sub/dir*" -exec chmod 660 {} +
+        #find /srv/foobar.com -type d -wholename "*path/to/writeable/sub/dir*" -exec chmod 770 {} +
 
-#   <Insert additional deploy steps here>
-#   ex: drush updb -y
+        #   <Insert additional deploy steps here>
+        #   ex: drush updb -y
 
-#   Closing log
-DATE_TIME=$(date +"%F %H:%M:%S")
-echo "\n${DATE_TIME} : Finished Deploy" >> $LOG_FILE
+        #   Closing log
+        DATE_TIME=$(date +"%F %H:%M:%S")
+        echo "\n${DATE_TIME} : Finished Deploy" >> $LOG_FILE
+
+        #   Latest copy
+        yes | cp $LOG_FILE $LOG_LATEST_COPY
+    fi
+done
 
 ' > /srv/foobar.com/.git/hooks/post-receive
 
