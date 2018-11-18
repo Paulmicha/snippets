@@ -1,235 +1,275 @@
 
 /**
- *  Toggler jQuery plugin.
+ * Toggler jQuery plugin.
  *
- *  Binary state change: (de)activates element(s) by clicking on element(s).
- *  This only toggles classes "is-off" and "is-on" - no styling is implemented.
- *  It also toggles aria "expanded" and "hidden" attributes + preventDefault()
- *  on clicked elements.
+ * Binary state change: (de)activates element(s) by clicking on element(s).
+ * This only toggles classes "is-off" and "is-on" - no styling is implemented.
+ * It also toggles aria "expanded" and "hidden" attributes + preventDefault()
+ * on clicked elements.
  *
- *  This state is set both on the target as well as the trigger(s). Multiple
- *  triggers and multiple targets are supported.
- *  By default, keeps only one trigger(s)/target(s) pair active at a time,
- *  essentially behaving like radios or tabs.
+ * This state is set both on the target as well as the trigger(s). Multiple
+ * triggers and multiple targets are supported.
+ * By default, keeps only one trigger(s)/target(s) pair active at a time,
+ * essentially behaving like radios or tabs.
  *
- *  Roadmap :
- *  • Modularize (split into optional, independent smaller functionalities).
- *  • Use edenspiekermann/a11y-toggle
- *  • Custom events + overridable class names.
- *  • Custom transitions : callback presets add-ons + CSS deps.
+ * @param options
+ *   Optional object : {
+ *     callback : function called after state change with 3 arguments :
+ *       the clicked element, toggle target, and options object.
+ *     trigger_kill : function allowing to prevent toggles if it returns false.
+ *        It gets 2 arguments : the trigger element, and options object.
+ *     no_prevent_default : boolean to avoid preventDefault() on click.
+ *     no_single_on : prevents radio-like behavior.
+ *     tab_like : boolean to make toggles behave like tabs (once active, stay
+ *       active if clicked again - only switch off when clicking on another
+ *       toggle). Incompatible with 'no_single_on' option.
+ *     trigger_class: object containing overridable CSS classes for triggers.
+ *       defaults to: {on: 'is-on', off: 'is-off'}
+ *     target_class: object containing overridable CSS classes for targets.
+ *       defaults to: {on: 'is-on', off: 'is-off', once: 'has-triggered'}
+ *   }
  *
- *  @param options
- *      Optional object : {
- *          callback : function called after state change with 3 arguments :
- *              the clicked element, toggle target, and options object;
- *          no_prevent_default : allows to cancel default preventDefault() on
- *              click;
- *          no_single_on : prevents radio-like behavior.
- *      }
+ * @example with <a>
+ *   JS : $('a[data-toggler]').toggler();
+ *   HTML : <a class="is-off" href="#target-by-id" aria-haspopup="true" aria-controls="target-by-id" data-toggler>...</a>
+ *   <div class="is-off" id="target-by-id">...</div>
+ * @example variant with <button>
+ *   JS : $('button[aria-controls]').toggler();
+ *   HTML : <button class="is-off" aria-haspopup="true" aria-controls="target-by-id">...</button>
+ * @example with custom callback (3 arguments : clicked element, toggle target, options object)
+ *   JS : $('a[data-toggler]').toggler({ "callback": my_custom_callback_function });
+ *   function my_custom_callback_function($clicked_element, $toggle_target) {  }
  *
- *  @example with <a>
- *      JS : $('a[data-toggler]').toggler();
- *      HTML : <a class="is-off" href="#target-by-id" aria-haspopup="true" aria-controls="target-by-id" data-toggler>...</a>
- *      <div class="is-off" id="target-by-id">...</div>
- *  @example variant with <button>
- *      JS : $('button[aria-controls]').toggler();
- *      HTML : <button class="is-off" aria-haspopup="true" aria-controls="target-by-id">...</button>
- *  @example with custom callback (3 arguments : clicked element, toggle target, options object)
- *      JS : $('a[data-toggler]').toggler({ "callback": my_custom_callback_function });
- *      function my_custom_callback_function($clicked_element, $toggle_target) {  }
+ * W3C Recommendation WAI-ARIA references :
+ * @see http://www.w3.org/TR/wai-aria/states_and_properties#aria-controls
+ * @see http://www.w3.org/TR/wai-aria/states_and_properties#aria-haspopup
  *
- *  W3C Recommendation WAI-ARIA references :
- *  @see http://www.w3.org/TR/wai-aria/states_and_properties#aria-controls
- *  @see http://www.w3.org/TR/wai-aria/states_and_properties#aria-haspopup
+ * Source :
+ * https://github.com/Paulmicha/snippets/blob/master/Front-end%2FJavascript%2FjQuery%2Ftoggler.js
  */
-jQuery.fn.toggler = function(options)
-{
-    $ = jQuery;
+(function($, undefined) {
+  jQuery.fn.toggler = function(options) {
 
-    //  For inner iteration
-    //  @see several triggers for single target
     var $triggers = $(this);
+    var default_options = {
+      tab_like: false,
+      no_single_on: false,
+      no_prevent_default: false,
+      trigger_class: {on: 'is-on', off: 'is-off'},
+      target_class: {on: 'is-on', off: 'is-off', once: 'has-triggered'}
+    };
 
-    $triggers.each(function()
-    {
-        var $this = $(this),
-            href = $this.attr('href'),
-            target_selector = href ? href : '#' + $this.attr('aria-controls'),
-            $target = target_selector ? $(target_selector) : {};
+    options = $.extend(default_options, options);
 
-        if ($target.length)
-        {
-            //  Keep as data on toggle for later access
-            $this.data('toggle_controls', $target);
+    /**
+     * Toggles a single trigger.
+     *
+     * This acts upon the interactive element (NOT its target).
+     *
+     * @param object $trigger
+     *  An interactive jQuery element (a trigger) in current toggle batch.
+     * @param string new_state (allowed values : 'on' or 'off')
+     *  [optional] If provided, forces which state to set.
+     */
+    var fn_toggle_trigger = function($trigger, new_state) {
+      var aria_expanded = $trigger.attr('aria-expanded');
+      if (!new_state) {
+        new_state = !$trigger.hasClass(options.trigger_class.on) ? 'on' : 'off';
+      }
+      switch (new_state) {
+        case 'on':
+          $trigger.removeClass(options.trigger_class.off).addClass(options.trigger_class.on);
+          if (aria_expanded) {
+            $trigger.attr('aria-expanded', 'true');
+          }
+          break;
+        case 'off':
+          $trigger.removeClass(options.trigger_class.on).addClass(options.trigger_class.off);
+          if (aria_expanded) {
+            $trigger.attr('aria-expanded', 'false');
+          }
+          break;
+      }
+    };
 
-            //  Handle several triggers for single target
-            var extra_triggers = [];
+    /**
+     * Toggles a single target.
+     *
+     * This acts upon the targeted element (NOT its trigger).
+     *
+     * @param object $target
+     *  A single targeted jQuery element in current toggle batch.
+     * @param string new_state (allowed values : 'on' or 'off')
+     *  [optional] If provided, forces which state to set.
+     */
+    var fn_toggle_target = function($target, new_state) {
+      var aria_hidden = $target.attr('aria-hidden');
+      if (!new_state) {
+        new_state = !$target.hasClass(options.target_class.on) ? 'on' : 'off';
+      }
+      switch (new_state) {
+        case 'on':
+          $target.removeClass(options.target_class.off).addClass(options.target_class.on);
+          if (aria_hidden) {
+            $target.attr('aria-hidden', 'false');
+          }
+          // Some transitions require an additionel class "has-triggered"
+          // to properly function. It only needs to exist after the first time the
+          // trigger was used.
+          if (!$target.hasClass(options.target_class.once)) {
+            $target.addClass(options.target_class.once);
+          }
+          break;
+        case 'off':
+          $target.removeClass(options.target_class.on).addClass(options.target_class.off);
+          if (aria_hidden) {
+            $target.attr('aria-hidden', 'true');
+          }
+          break;
+      }
+    };
 
-            //  Reference all other triggers (except itself)
-            $triggers.each(function()
-            {
-                var $iterated_trigger = $(this);
-                if ($iterated_trigger.attr('href') == href && $iterated_trigger[0] !== $this[0]) {
-                    extra_triggers.push($iterated_trigger);
-                }
-            });
+    /**
+     * Get the target from a trigger element.
+     *
+     * @param object $trigger
+     *  An interactive jQuery element (a trigger) in current toggle batch.
+     * @return object || boolean
+     *  The targeted jQuery element if it exists, or false.
+     */
+    var fn_get_target = function($trigger) {
+      var $target = $trigger.data('toggle_target');
+      if ($target && $target.length) {
+        return $target;
+      }
+      var aria_controls = $trigger.attr('aria-controls');
+      var target_selector = aria_controls ? ('#' + aria_controls) : $trigger.attr('href');
+      return target_selector ? $(target_selector) : false;
+    };
 
-            //  Keep these refs on itself
-            if (extra_triggers && extra_triggers.length) {
-                $this.data('extra_triggers', extra_triggers);
-            }
+    /**
+     * Executes the toggle event.
+     *
+     * @param object $trigger
+     *  An interactive jQuery element (a trigger) in current toggle batch.
+     */
+    var fn_exec_event = function($trigger) {
+      var $target = fn_get_target($trigger);
 
-            //  Single on, see below
-            $this.data('triggers', $triggers);
+      // Optional Tab-like behavior (does nothing if already on).
+      if (options.tab_like && !$trigger.hasClass(options.trigger_class.off)) {
+        return;
+      }
+      // Optional Trigger Kill Switch (custom callback to cancel out event).
+      if (options.trigger_kill && typeof options.trigger_kill === 'function' && !options.trigger_kill($trigger, options)) {
+        return;
+      }
+      // Nothing to toggle renders this trigger pointless.
+      if ($target.length < 1) {
+        return;
+      }
 
+      fn_toggle_target($target);
+      fn_toggle_trigger($trigger);
 
-            /**
-             *  Click on toggle
-             *  @todo refacto : fire customizable events
-             */
-            $this.click(function(e)
-            {
-                var $clicked_element = $(this),
-                    $toggle_target = $clicked_element.data('toggle_controls'),
-                    current_extra_triggers = $clicked_element.data('extra_triggers');
+      var other_triggers = $trigger.data('other_triggers');
+      if (other_triggers && other_triggers.length) {
+        var i = 0;
+        var max = other_triggers.length;
 
-                //  Prevent default link behaviour unless allowed in options
-                if (!options || !options.no_prevent_default) {
-                    e.preventDefault();
-                }
-
-                if ($target.length)
-                {
-                    $toggle_target.toggleClass('is-off').toggleClass('is-on');
-                    $clicked_element.toggleClass('is-off').toggleClass('is-on');
-
-                    //  Update other "triggers" pointing to the same target
-                    if (current_extra_triggers && current_extra_triggers.length)
-                    {
-                        var i = 0,
-                            max = current_extra_triggers.length;
-                        for (i = 0; i < max; i++)
-                        {
-                            var $extra_trigger = current_extra_triggers[i];
-
-                            $extra_trigger.toggleClass('is-off').toggleClass('is-on');
-
-                            //  Extra triggers should only have 'aria-expanded'
-                            var aria_expanded = $extra_trigger.attr('aria-expanded');
-                            if (aria_expanded)
-                            {
-                                aria_expanded == 'true' ?
-                                    $extra_trigger.attr('aria-expanded', 'false') :
-                                    $extra_trigger.attr('aria-expanded', 'true') ;
-                            }
-                        };
-                    }
-
-                    //  Accessibility : toggle attribute aria-hidden
-                    //  http://www.w3.org/TR/wai-aria/states_and_properties#aria-hidden
-                    var aria_hidden = $toggle_target.attr('aria-hidden');
-                    if (aria_hidden)
-                    {
-                        aria_hidden == 'true' ?
-                            $toggle_target.attr('aria-hidden', 'false') :
-                            $toggle_target.attr('aria-hidden', 'true') ;
-                    }
-
-                    //  Accessibility : toggle attribute aria-expanded
-                    //  http://www.w3.org/TR/wai-aria/states_and_properties#aria-expanded
-                    var aria_expanded = $clicked_element.attr('aria-expanded');
-                    if (aria_expanded)
-                    {
-                        aria_expanded == 'true' ?
-                            $clicked_element.attr('aria-expanded', 'false') :
-                            $clicked_element.attr('aria-expanded', 'true') ;
-                    }
-
-
-                    //  Single on option (default + option to disable) :
-                    //  allows to keep only one trigger(s)/target(s) pair active
-                    //  at a time (in current set of triggers), essentially
-                    //  behaving like radios or tabs
-                    //  @todo refacto : reuse same method in plugin
-                    if (!options || !options.no_single_on)
-                    {
-                        $this.data('triggers').each(function()
-                        {
-                            var $this_single_on = $(this),
-                                this_single_on_href = $this_single_on.attr('href'),
-                                this_single_on_target_selector = this_single_on_href ? this_single_on_href : '#' + $this_single_on.attr('aria-controls'),
-                                clicked_element_href = $clicked_element.attr('href'),
-                                clicked_element_target_selector = clicked_element_href ? clicked_element_href : '#' + $clicked_element.attr('aria-controls');
-
-                            if (this_single_on_target_selector != clicked_element_target_selector && $this_single_on.hasClass('is-on'))
-                            {
-                                //  @todo method in plugin for that
-                                var $target = $this_single_on.data('toggle_controls'),
-                                    extra_triggers = $this_single_on.data('extra_triggers'),
-                                    single_on_extra_triggers = $this_single_on.data('extra_triggers');
-
-                                if ($target.length)
-                                {
-                                    $target.toggleClass('is-off').toggleClass('is-on');
-                                    $this_single_on.toggleClass('is-off').toggleClass('is-on');
-
-                                    if (single_on_extra_triggers && single_on_extra_triggers.length)
-                                    {
-                                        var i = 0,
-                                            max = single_on_extra_triggers.length;
-                                        for (i = 0; i < max; i++)
-                                        {
-                                            var $extra_trigger = single_on_extra_triggers[i],
-                                                aria_expanded = $extra_trigger.attr('aria-expanded');
-
-                                            $extra_trigger.toggleClass('is-off').toggleClass('is-on');
-
-                                            if (aria_expanded)
-                                            {
-                                                aria_expanded == 'true' ?
-                                                    $extra_trigger.attr('aria-expanded', 'false') :
-                                                    $extra_trigger.attr('aria-expanded', 'true') ;
-                                            }
-                                        }
-                                    }
-
-                                    var aria_hidden = $target.attr('aria-hidden');
-                                    if (aria_hidden)
-                                    {
-                                        aria_hidden == 'true' ?
-                                            $target.attr('aria-hidden', 'false') :
-                                            $target.attr('aria-hidden', 'true') ;
-                                    }
-                                    var aria_expanded = $this_single_on.attr('aria-expanded');
-                                    if (aria_expanded)
-                                    {
-                                        aria_expanded == 'true' ?
-                                            $this_single_on.attr('aria-expanded', 'false') :
-                                            $this_single_on.attr('aria-expanded', 'true') ;
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-
-                    //  Custom callback
-                    if (options && typeof options.callback === 'function')
-                    {
-                        try {
-                            options.callback($clicked_element, $toggle_target, options);
-                        }
-                        catch(e)
-                        {
-                            //  debug
-                            //console.log('Exception in Click on toggle : ');
-                            //console.log($clicked_element);
-                            //console.log('-> error message :');
-                            //console.log(e);
-                        }
-                    }
-                }
-            });
+        // Handle the "single on" option - first : when it's NOT requested.
+        // The easiest case is keeping everything in sync, provided initial
+        // state is correctly represented in HTML before init is run. In this
+        // case, we can update all the other triggers pointing to the same
+        // target "blindly".
+        if (options.no_single_on) {
+          for (i = 0; i < max; i++) {
+            fn_toggle_trigger(other_triggers[i]);
+          };
         }
+
+        // Handle the "single on" option - when it IS requested.
+        // This allows to keep only one trigger(s)/target(s) pair active at a
+        // time, essentially behaving like radios or tabs.
+        else {
+          var new_state_for_others = $trigger.hasClass(options.trigger_class.on) ? 'off' : 'on';
+
+          for (i = 0; i < max; i++) {
+            var $other_trigger = other_triggers[i];
+            var $other_trigger_target = fn_get_target($other_trigger);
+
+            fn_toggle_target($other_trigger_target, new_state_for_others);
+            fn_toggle_trigger($other_trigger, new_state_for_others);
+          };
+        }
+      }
+
+      // Custom callback.
+      if (options && typeof options.callback === 'function') {
+        try {
+          options.callback($trigger, $target, options);
+        }
+        catch(e) {
+          // debug
+          //console.log('Exception in Click on toggle : ');
+          //console.log($trigger);
+          //console.log('-> error message :');
+          //console.log(e);
+        }
+      }
+    };
+
+    /**
+     * Inits a single trigger.
+     *
+     * @param object $trigger
+     *  An interactive jQuery element (a trigger) in current toggle batch.
+     */
+    var fn_init_trigger = function($trigger) {
+      var $target = fn_get_target($trigger);
+
+      // console.log('init trigger ' + $trigger.attr('id') + ' - target : ' + $target.attr('id'));
+
+      if (!$target.length && options.targets) {
+        $target = options.targets;
+      }
+
+      if ($target.length) {
+        $trigger.data('toggle_target', $target);
+
+        // Reference all other triggers (except itself)
+        var other_triggers = [];
+        $triggers.each(function() {
+          var $iterated_trigger = $(this);
+
+          if ($iterated_trigger[0] !== $trigger[0]) {
+            other_triggers.push($iterated_trigger);
+          }
+        });
+
+        if (other_triggers && other_triggers.length) {
+          $trigger.data('other_triggers', other_triggers);
+        }
+
+        /**
+         * The "toggle" is executed when clicking on any one of the triggers.
+         */
+        $trigger.click(function(e) {
+          fn_exec_event($(this));
+
+          // Prevent default link behaviour unless allowed in options.
+          if (!options.no_prevent_default) {
+            e.preventDefault();
+          }
+        });
+      }
+    };
+
+    // Initial setup.
+    $triggers.each(function() {
+      fn_init_trigger($(this));
     });
-};
+
+  };
+})(jQuery);
+
