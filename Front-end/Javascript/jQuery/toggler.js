@@ -15,7 +15,7 @@
  * @param options
  *   Optional object : {
  *     callback : function called after state change with 3 arguments :
- *       the clicked element, toggle target, and options object.
+ *       the clicked element (trigger), its target, and the options object.
  *     trigger_kill : function allowing to prevent toggles if it returns false.
  *        It gets 2 arguments : the trigger element, and options object.
  *     no_prevent_default : boolean to avoid preventDefault() on click.
@@ -38,7 +38,7 @@
  *   HTML : <button class="is-off" aria-haspopup="true" aria-controls="target-by-id">...</button>
  * @example with custom callback (3 arguments : clicked element, toggle target, options object)
  *   JS : $('a[data-toggler]').toggler({ "callback": my_custom_callback_function });
- *   function my_custom_callback_function($clicked_element, $toggle_target) {  }
+ *   function my_custom_callback_function($trigger, $target, options) { ... }
  *
  * W3C Recommendation WAI-ARIA references :
  * @see http://www.w3.org/TR/wai-aria/states_and_properties#aria-controls
@@ -130,7 +130,7 @@
     };
 
     /**
-     * Get the target from a trigger element.
+     * Gets the target from a trigger element.
      *
      * @param object $trigger
      *  An interactive jQuery element (a trigger) in current toggle batch.
@@ -165,7 +165,7 @@
         return;
       }
       // Nothing to toggle renders this trigger pointless.
-      if ($target.length < 1) {
+      if (!$target || $target.length < 1) {
         return;
       }
 
@@ -173,18 +173,20 @@
       fn_toggle_trigger($trigger);
 
       var other_triggers = $trigger.data('other_triggers');
+      var other_triggers_same_target = $trigger.data('other_triggers_same_target');
+
       if (other_triggers && other_triggers.length) {
         var i = 0;
-        var max = other_triggers.length;
 
         // Handle the "single on" option - first : when it's NOT requested.
         // The easiest case is keeping everything in sync, provided initial
         // state is correctly represented in HTML before init is run. In this
         // case, we can update all the other triggers pointing to the same
         // target "blindly".
-        if (options.no_single_on) {
+        if (options.no_single_on && other_triggers_same_target && other_triggers_same_target.length) {
+          var max = other_triggers_same_target.length;
           for (i = 0; i < max; i++) {
-            fn_toggle_trigger(other_triggers[i]);
+            fn_toggle_trigger(other_triggers_same_target[i]);
           };
         }
 
@@ -192,6 +194,7 @@
         // This allows to keep only one trigger(s)/target(s) pair active at a
         // time, essentially behaving like radios or tabs.
         else {
+          var max = other_triggers.length;
           var new_state_for_others = $trigger.hasClass(options.trigger_class.on) ? 'off' : 'on';
 
           for (i = 0; i < max; i++) {
@@ -205,16 +208,12 @@
       }
 
       // Custom callback.
-      if (options && typeof options.callback === 'function') {
+      if (options.callback && typeof options.callback === 'function') {
         try {
           options.callback($trigger, $target, options);
         }
         catch(e) {
-          // debug
-          //console.log('Exception in Click on toggle : ');
-          //console.log($trigger);
-          //console.log('-> error message :');
-          //console.log(e);
+          console.log(e);
         }
       }
     };
@@ -228,8 +227,6 @@
     var fn_init_trigger = function($trigger) {
       var $target = fn_get_target($trigger);
 
-      // console.log('init trigger ' + $trigger.attr('id') + ' - target : ' + $target.attr('id'));
-
       if (!$target.length && options.targets) {
         $target = options.targets;
       }
@@ -237,18 +234,29 @@
       if ($target.length) {
         $trigger.data('toggle_target', $target);
 
-        // Reference all other triggers (except itself)
+        // Reference all other triggers (except itself), and keep a reference
+        // to any other triggers pointing to the same target.
         var other_triggers = [];
+        var other_triggers_same_target = [];
+
         $triggers.each(function() {
           var $iterated_trigger = $(this);
 
           if ($iterated_trigger[0] !== $trigger[0]) {
             other_triggers.push($iterated_trigger);
+
+            var $iterated_trigger_target = fn_get_target($iterated_trigger);
+            if ($iterated_trigger_target && $iterated_trigger_target.length && $iterated_trigger_target[0] == $target[0]) {
+              other_triggers_same_target.push($iterated_trigger);
+            }
           }
         });
 
         if (other_triggers && other_triggers.length) {
           $trigger.data('other_triggers', other_triggers);
+        }
+        if (other_triggers_same_target && other_triggers_same_target.length) {
+          $trigger.data('other_triggers_same_target', other_triggers_same_target);
         }
 
         /**
