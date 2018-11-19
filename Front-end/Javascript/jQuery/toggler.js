@@ -2,15 +2,23 @@
 /**
  * Toggler jQuery plugin.
  *
- * Binary state change: (de)activates element(s) by clicking on element(s).
- * This only toggles classes "is-off" and "is-on" - no styling is implemented.
- * It also toggles aria "expanded" and "hidden" attributes + preventDefault()
- * on clicked elements.
+ * Binary state change: (de)activates element(s) by clicking on other element(s)
+ * bound together using "href" or "aria-controls" attributes.
  *
- * This state is set both on the target as well as the trigger(s). Multiple
- * triggers and multiple targets are supported.
+ * This toggles overridable classes "is-off" and "is-on" on both the clicked
+ * elements (= triggers) and their targets. No styling is implemented. It also
+ * toggles aria "expanded" and "hidden" attributes + preventDefault() on clicked
+ * elements (unless opted-out via options).
+ *
+ * This state is kept in sync on target(s)/trigger(s) pairs. Multiple triggers
+ * and multiple targets - any combinations - are supported for every "batch"
+ * (= set of triggers bound together every time this plugin is initialized).
+ *
  * By default, keeps only one trigger(s)/target(s) pair active at a time,
  * essentially behaving like radios or tabs.
+ *
+ * It requires the initial "state" to be correctly represented in HTML before
+ * this plugin is used - attributes and classes.
  *
  * @param options
  *   Optional object : {
@@ -27,6 +35,8 @@
  *       defaults to: {on: 'is-on', off: 'is-off'}
  *     target_class: object containing overridable CSS classes for targets.
  *       defaults to: {on: 'is-on', off: 'is-off', once: 'has-triggered'}
+ *     targets: jQuery element - matches to custom targets. Allows to manually
+ *       set target(s) for current trigger(s).
  *   }
  *
  * @example with <a>
@@ -62,12 +72,10 @@
     options = $.extend(default_options, options);
 
     /**
-     * Toggles a single trigger.
-     *
-     * This acts upon the interactive element (NOT its target).
+     * Toggles a single trigger element.
      *
      * @param object $trigger
-     *  An interactive jQuery element (a trigger) in current toggle batch.
+     *  The trigger jQuery element.
      * @param string new_state (allowed values : 'on' or 'off')
      *  [optional] If provided, forces which state to set.
      */
@@ -93,12 +101,10 @@
     };
 
     /**
-     * Toggles a single target.
-     *
-     * This acts upon the targeted element (NOT its trigger).
+     * Toggles given target(s).
      *
      * @param object $target
-     *  A single targeted jQuery element in current toggle batch.
+     *  The target(s) (jQuery element).
      * @param string new_state (allowed values : 'on' or 'off')
      *  [optional] If provided, forces which state to set.
      */
@@ -130,10 +136,10 @@
     };
 
     /**
-     * Gets the target from a trigger element.
+     * Gets the target(s) from a single trigger element.
      *
      * @param object $trigger
-     *  An interactive jQuery element (a trigger) in current toggle batch.
+     *  The trigger jQuery element.
      * @return object || boolean
      *  The targeted jQuery element if it exists, or false.
      */
@@ -151,7 +157,7 @@
      * Executes the toggle event.
      *
      * @param object $trigger
-     *  An interactive jQuery element (a trigger) in current toggle batch.
+     *  The trigger jQuery element.
      */
     var fn_exec_event = function($trigger) {
       var $target = fn_get_target($trigger);
@@ -164,12 +170,11 @@
       if (options.trigger_kill && typeof options.trigger_kill === 'function' && !options.trigger_kill($trigger, options)) {
         return;
       }
-      // Nothing to toggle renders this trigger pointless.
-      if (!$target || $target.length < 1) {
-        return;
+
+      if ($target && $target.length) {
+        fn_toggle_target($target);
       }
 
-      fn_toggle_target($target);
       fn_toggle_trigger($trigger);
 
       var other_triggers = $trigger.data('other_triggers');
@@ -178,22 +183,20 @@
       if (other_triggers && other_triggers.length) {
         var i = 0;
 
-        // Handle the "single on" option - first : when it's NOT requested.
-        // The easiest case is keeping everything in sync, provided initial
-        // state is correctly represented in HTML before init is run. In this
-        // case, we can update all the other triggers pointing to the same
-        // target "blindly".
-        if (options.no_single_on && other_triggers_same_target && other_triggers_same_target.length) {
+        // Independently of the "single on" option, all triggers pointing to the
+        // same target(s) should always remain in sync.
+        if (other_triggers_same_target && other_triggers_same_target.length) {
           var max = other_triggers_same_target.length;
+          var new_state_sync = $trigger.hasClass(options.trigger_class.on) ? 'on' : 'off';
           for (i = 0; i < max; i++) {
-            fn_toggle_trigger(other_triggers_same_target[i]);
+            fn_toggle_trigger(other_triggers_same_target[i], new_state_sync);
           };
         }
 
-        // Handle the "single on" option - when it IS requested.
+        // Handle the "single on" option - when it IS requested (by default).
         // This allows to keep only one trigger(s)/target(s) pair active at a
         // time, essentially behaving like radios or tabs.
-        else {
+        if (!options.no_single_on) {
           var max = other_triggers.length;
           var new_state_for_others = $trigger.hasClass(options.trigger_class.on) ? 'off' : 'on';
 
@@ -201,7 +204,10 @@
             var $other_trigger = other_triggers[i];
             var $other_trigger_target = fn_get_target($other_trigger);
 
-            fn_toggle_target($other_trigger_target, new_state_for_others);
+            if ($other_trigger_target && $other_trigger_target.length) {
+              fn_toggle_target($other_trigger_target, new_state_for_others);
+            }
+
             fn_toggle_trigger($other_trigger, new_state_for_others);
           };
         }
@@ -222,20 +228,22 @@
      * Inits a single trigger.
      *
      * @param object $trigger
-     *  An interactive jQuery element (a trigger) in current toggle batch.
+     *  The trigger jQuery element.
      */
     var fn_init_trigger = function($trigger) {
       var $target = fn_get_target($trigger);
 
-      if (!$target.length && options.targets) {
+      // Allow option to manually set target(s) for current trigger(s).
+      if (!$target && options.targets) {
         $target = options.targets;
       }
 
       if ($target.length) {
         $trigger.data('toggle_target', $target);
 
-        // Reference all other triggers (except itself), and keep a reference
-        // to any other triggers pointing to the same target.
+        // All triggers in current "batch" keep 2 lists of references:
+        // - Other trigger(s) pointing to different target(s),
+        // - Other trigger(s) pointing to the same target(s).
         var other_triggers = [];
         var other_triggers_same_target = [];
 
@@ -243,11 +251,20 @@
           var $iterated_trigger = $(this);
 
           if ($iterated_trigger[0] !== $trigger[0]) {
-            other_triggers.push($iterated_trigger);
-
             var $iterated_trigger_target = fn_get_target($iterated_trigger);
-            if ($iterated_trigger_target && $iterated_trigger_target.length && $iterated_trigger_target[0] == $target[0]) {
-              other_triggers_same_target.push($iterated_trigger);
+
+            if ($iterated_trigger_target && $iterated_trigger_target.length) {
+              // Handle multiple targets comparison.
+              // See https://stackoverflow.com/a/3856290
+              if ($iterated_trigger_target.length == $target.length && $iterated_trigger_target.length == $iterated_trigger_target.filter($target).length) {
+                other_triggers_same_target.push($iterated_trigger);
+              }
+              else {
+                other_triggers.push($iterated_trigger);
+              }
+            }
+            else {
+              other_triggers.push($iterated_trigger);
             }
           }
         });
