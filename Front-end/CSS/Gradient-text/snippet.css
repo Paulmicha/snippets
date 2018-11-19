@@ -1,0 +1,20 @@
+
+/* https://webplatform.news/issues/2018-11-02 */
+
+h1 {
+  color: orangered; /* fallback color for IE */
+}
+
+@supports (background-clip: text) {
+  h1 {
+    /* 1. declare the gradient as the background image */
+    background-image: linear-gradient(45deg, fuchsia, orangered);
+
+    /* 2. clip the background image to the text */
+    background-clip: text;
+
+    /* 3. make the text transparent to reveal the background */
+    color: transparent;
+  }
+}
+
